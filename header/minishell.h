@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sjupille <sjupille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 17:42:19 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/04/01 13:35:16 by abeaufil         ###   ########.fr       */
+/*   Updated: 2025/04/21 11:51:38 by sjupille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <bs_tree.h>
-# include <as_tree.h>
-# include <typedefs.h>
 # include <curses.h>
 # include <dirent.h>
 # include <errno.h>
