@@ -6,7 +6,7 @@
 #    By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/04 11:47:43 by abeaufil          #+#    #+#              #
-#    Updated: 2025/04/17 17:04:25 by abeaufil         ###   ########.fr        #
+#    Updated: 2025/04/21 11:52:43 by abeaufil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ OBJ_PATH = objet/
 
 SRC		= \
 		
-			
+		
 
 SRCS	= $(addprefix $(SRC_PATH), $(SRC))
 OBJ		= $(SRC:.c=.o)
