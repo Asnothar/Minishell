@@ -1,0 +1,165 @@
+1. INITIALISATION DU SHELL
+main()
+{
+    initialiser_structures()
+    copier_envp()  // Pour avoir une copie modifiable de l'environnement
+
+    boucle_principale()
+}
+
+
+2. BOUCLE PRINCIPALE
+
+boucle_principale()
+{
+    tant que (true)
+    {
+        afficher_prompt()
+        ligne = lire_input()  // readline
+
+        si (ligne est vide ou NULL)
+            continuer
+
+        ajouter_historique(ligne)
+
+        tokens = lexer(ligne)
+
+        si (erreur de syntaxe)
+            afficher_erreur()
+            continuer
+
+        commandes = parser(tokens)
+
+        exécuter_commandes(commandes)
+
+        libérer(commandes, tokens, ligne)
+    }
+}
+
+3. LEXER (TOKENIZER)
+
+lexer(ligne)
+{
+    init_liste_tokens()
+
+    pour chaque caractère dans ligne
+    {
+        si (caractère est un espace)
+            ignorer
+
+        sinon si (caractère est un opérateur : |, <, >, <<, >>)
+            ajouter_token(OPÉRATEUR)
+
+        sinon si (caractère est une quote ' ou ")
+            extraire_chaine_quotee()
+
+        sinon
+            extraire_mot_simple()
+    }
+
+    retourner liste_tokens
+}
+
+4. PARSER (STRUCTURER LES COMMANDES)
+
+parser(tokens)
+{
+    init_liste_commandes()
+
+    tant que (tokens restants)
+    {
+        créer_nouvelle_commande()
+
+        tant que (token pas pipe et tokens restants)
+        {
+            si (token est une redirection)
+                ajouter_redirection()
+
+            sinon
+                ajouter_argument()
+        }
+
+        ajouter_commande_à_liste()
+    }
+
+    retourner liste_commandes
+}
+
+5. EXECUTION DES COMMANDES
+
+exécuter_commandes(liste_commandes)
+{
+    si (une seule commande && c'est un builtin sans pipe)
+        exécuter_builtin_en_parent()
+
+    sinon
+        pour chaque commande
+        {
+            pipe si nécessaire
+            fork()
+
+            si (fils)
+            {
+                redirections
+                exécuter_une_commande()
+            }
+            sinon
+            {
+                fermer_descripteurs inutiles
+            }
+        }
+
+    attendre_tous_les_processus()
+}
+
+6. GESTION DES REDIRECTIONS
+
+gérer_redirections(cmd)
+{
+    pour chaque redirection dans cmd
+    {
+        si (type == input)
+            ouvrir_fichier_lecture()
+
+        si (type == output)
+            ouvrir_fichier_écriture()
+
+        si (type == append)
+            ouvrir_fichier_en_append()
+
+        si (type == heredoc)
+            lire_heredoc()
+    }
+}
+
+7. BUILTINS
+
+exécuter_builtin(cmd)
+{
+    si (cmd == echo)
+        builtin_echo()
+
+    sinon si (cmd == cd)
+        builtin_cd()
+
+    sinon si (cmd == export)
+        builtin_export()
+
+    sinon si (cmd == unset)
+        builtin_unset()
+
+    sinon si (cmd == env)
+        builtin_env()
+
+    sinon si (cmd == exit)
+        builtin_exit()
+}
+
+8. CLEAN & GESTION DES SIGNAUX
+
+gestion_signaux()
+{
+    signal(SIGINT, handler_ctrl_c)
+    signal(SIGQUIT, handler_ctrl_backslash)
+}
+
