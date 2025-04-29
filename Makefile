@@ -6,7 +6,7 @@
 #    By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/04 11:47:43 by abeaufil          #+#    #+#              #
-#    Updated: 2025/04/21 11:52:43 by abeaufil         ###   ########.fr        #
+#    Updated: 2025/04/29 16:14:49 by abeaufil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,13 +20,18 @@ RESET   = \033[0m
 NAME	= minishell
 CC		= cc
 CFLAGS	= -Wall -Werror -Wextra -ggdb -gdwarf-3
+LDFLAGS = -lreadline
 
 SRC_PATH = sources/
 OBJ_PATH = objet/
 
-SRC		= \
-		
-		
+SRC		=	\
+			utils/utils_1.c \
+			utils/tokens.c \
+			\
+			parsing/parsing_1.c \
+			\
+			main.c \
 
 SRCS	= $(addprefix $(SRC_PATH), $(SRC))
 OBJ		= $(SRC:.c=.o)
@@ -40,6 +45,7 @@ LIBFT_LIB = $(LIBFT_DIR)/libft.a
 all: $(OBJ_PATH) $(NAME)
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
+	@mkdir -p $(dir $@)  # Ensure the directory exists
 	@$(CC) $(CFLAGS) -c $< -o $@ $(HEAD) $(LIBFT_INCLUDE)
 	@echo "$(CYAN)🔧 Compilation de $(notdir $<)$(RESET)"
 
@@ -48,7 +54,7 @@ $(OBJ_PATH):
 	@echo "$(YELLOW)📁 Dossier $(OBJ_PATH) créé$(RESET)"
 
 $(NAME): $(OBJS) $(LIBFT_LIB)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) -o $(NAME) $(LDFLAGS)
 	@echo "$(GREEN)✅ $(NAME) créé avec succès !$(RESET)"
 
 $(LIBFT_LIB):
@@ -66,3 +72,4 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
+
