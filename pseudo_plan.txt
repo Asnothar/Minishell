@@ -196,3 +196,10 @@ The 7 standard builtins :
     Exits the shell with a status code.
     Example: exit 0
 
+
+by greg 
+1 faire une liste simple sur le env avec key content
+2 faire la tokenisation
+3 gerer la fermeture des quotes
+4 gerer les switch $
+5 gerer les quotes "'$USER'"

@@ -6,7 +6,7 @@
 /*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 13:41:18 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/04/30 13:49:52 by abeaufil         ###   ########.fr       */
+/*   Updated: 2025/04/30 17:56:40 by abeaufil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,6 @@ void	start_init(void)
 		free(shell);
 		exit(EXIT_FAILURE);
 	}
+	free(shell);
+	free(env);
 }

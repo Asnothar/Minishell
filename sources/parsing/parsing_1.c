@@ -6,7 +6,7 @@
 /*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 16:43:48 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/04/29 16:19:48 by abeaufil         ###   ########.fr       */
+/*   Updated: 2025/04/30 17:40:09 by abeaufil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@ int	check_syntax(char *line)
 	if (check_quotes(line))
 		return (write(2, "Error: Unmatched quotes\n", 24), 1);
 	if (check_pipe(line) > 1)
-		return (write(2, "Error: Too many pipes\n", 23), 1);
+		return (write(2, "Error: Too many pipes\n", 22), 1);
 	if (check_redirection(line) > 2)
-		return (write(2, "Error: Too many redirections\n", 31), 1);
+		return (write(2, "Error: Too many redirections\n", 29), 1);
 	if (check_special_characters(line))
 		return (write(2, "Error: Invalid special characters\n", 34), 1);
 	if (line[0] == '|' || line[0] == ';' || line[0] == '>' || line[0] == '<')

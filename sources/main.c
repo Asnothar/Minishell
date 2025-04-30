@@ -6,7 +6,7 @@
 /*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 17:38:01 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/04/30 17:31:27 by abeaufil         ###   ########.fr       */
+/*   Updated: 2025/04/30 18:42:10 by abeaufil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,23 @@ void	print_debug_info(char *line, char **tokens)
 	printf("---------- END ----------\n\n\n");
 }
 
+
+void free_split(char **split)
+{
+	int i;
+
+	i = 0;
+	while (split[i])
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
+}
 int	main(int argc, char **argv, char **envp)
 {
 	char	*line;
-	char	**tokens;
+	char	**tokens = NULL;
 
 	(void)argc;
 	(void)argv;
@@ -81,6 +94,8 @@ int	main(int argc, char **argv, char **envp)
 		line = readline("minishell> ");
 		if (!line)
 		{
+			if (tokens)
+				free_split(tokens);
 			write(1, "exit\n", 5);
 			break ;
 		}
@@ -95,10 +110,14 @@ int	main(int argc, char **argv, char **envp)
 		}
 		if (strcmp(line, "exit") == 0)
 		{
+			if (tokens)
+				free_split(tokens);
 			free(line);
 			break ;
 		}
 		free(line);
+		if (tokens)
+			free_split(tokens);
 	}
 	return (0);
 }
