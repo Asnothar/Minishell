@@ -6,15 +6,44 @@
 /*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 17:38:01 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/04/30 13:58:19 by abeaufil         ###   ########.fr       */
+/*   Updated: 2025/04/30 17:31:27 by abeaufil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
+t_token_type	get_token_type(char *token)
+{
+	if (!token)
+		return (WORD);
+	if (token[0] == '|' && token[1] == '\0')
+		return (PIPE);
+	if (token[0] == '<' && token[1] == '\0')
+		return (REDIR_IN);
+	if (token[0] == '>' && token[1] == '\0')
+		return (REDIR_OUT);
+	if (token[0] == '<' && token[1] == '<' && token[2] == '\0')
+		return (HERE_DOC);
+	return (WORD);
+}
+
+char	*get_token_type_str(t_token_type type)
+{
+	if (type == PIPE)
+		return ("PIPE");
+	if (type == REDIR_IN)
+		return ("REDIR_IN");
+	if (type == REDIR_OUT)
+		return ("REDIR_OUT");
+	if (type == HERE_DOC)
+		return ("HERE_DOC");
+	return ("WORD");
+}
+
 void	print_debug_info(char *line, char **tokens)
 {
-	int	i;
+	int				i;
+	t_token_type	type;
 
 	printf("---------- Input ----------\n");
 	if (line)
@@ -27,7 +56,8 @@ void	print_debug_info(char *line, char **tokens)
 		i = 0;
 		while (tokens[i])
 		{
-			printf("Token[%d]: [%s]\n", i, tokens[i]);
+			type = get_token_type(tokens[i]);
+			printf("Token[%d]: [%s] (%s)\n", i, tokens[i], get_token_type_str(type));
 			i++;
 		}
 	}
@@ -44,7 +74,8 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	(void)envp;
-	// start_init();
+	start_init();
+	setup_signals();
 	while (1)
 	{
 		line = readline("minishell> ");

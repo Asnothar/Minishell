@@ -6,7 +6,7 @@
 #    By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/04 11:47:43 by abeaufil          #+#    #+#              #
-#    Updated: 2025/04/30 13:50:58 by abeaufil         ###   ########.fr        #
+#    Updated: 2025/04/30 17:26:59 by abeaufil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRC		=	\
 			utils/utils_1.c \
 			utils/tokens.c \
 			utils/init.c \
+			utils/signal.c \
 			\
 			parsing/parsing_1.c \
 			\

@@ -6,7 +6,7 @@
 /*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 17:42:19 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/04/30 13:49:38 by abeaufil         ###   ########.fr       */
+/*   Updated: 2025/04/30 17:27:39 by abeaufil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,15 @@ typedef struct s_env
 	struct s_env	*next;	// Prochain élément de la liste chaînée
 }	t_env;
 
+typedef enum e_token_type
+{
+	WORD,
+	PIPE,
+	REDIR_IN,
+	REDIR_OUT,
+	HERE_DOC
+}	t_token_type;
+
 //	parsing
 //		parsing1.c
 int		check_quotes(char *line);
@@ -72,6 +81,10 @@ char	*handle_special_characters(const char *line, size_t *i);
 char	**initialize_tokens(size_t len);
 char	*process_token(const char *line, size_t *i, size_t len);
 char	**tokenize_input(const char *line);
+//		signal.c
+void	handle_sigint(int sig);
+void	handle_sigquit(int sig);
+void	setup_signals(void);
 //		utils1.c
 int		skip_whitespaces(const char *str, int i, int len);
 void	print_tokens(char **tokens);
