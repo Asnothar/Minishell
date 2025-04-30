@@ -6,7 +6,7 @@
 /*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 17:38:01 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/04/30 11:41:04 by abeaufil         ###   ########.fr       */
+/*   Updated: 2025/04/30 13:58:19 by abeaufil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	print_debug_info(char *line, char **tokens)
 		i = 0;
 		while (tokens[i])
 		{
-			printf("Token[%d]: %s\n", i, tokens[i]);
+			printf("Token[%d]: [%s]\n", i, tokens[i]);
 			i++;
 		}
 	}
@@ -44,6 +44,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	(void)envp;
+	// start_init();
 	while (1)
 	{
 		line = readline("minishell> ");

@@ -6,7 +6,7 @@
 /*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 17:42:19 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/04/30 11:45:56 by abeaufil         ###   ########.fr       */
+/*   Updated: 2025/04/30 13:49:38 by abeaufil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,20 @@ int		check_special_characters(char *line);
 int		check_syntax(char *line);
 
 //	utils
-//		utils1.c
-int		skip_whitespaces(const char *str, int i, int len);
-void	print_tokens(char **tokens);
+//		init.c
+t_cmd	*init_cmd(void);
+t_shell	*init_shell(void);
+t_env	*init_env(void);
+void	free_cmd(t_cmd *cmd);
+void	start_init(void);
 //		tokens.c
 char	*handle_quotes(const char *line, size_t *i, size_t len);
 char	*handle_special_characters(const char *line, size_t *i);
 char	**initialize_tokens(size_t len);
 char	*process_token(const char *line, size_t *i, size_t len);
 char	**tokenize_input(const char *line);
+//		utils1.c
+int		skip_whitespaces(const char *str, int i, int len);
+void	print_tokens(char **tokens);
 
 #endif

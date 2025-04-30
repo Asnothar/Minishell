@@ -6,7 +6,7 @@
 #    By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/04 11:47:43 by abeaufil          #+#    #+#              #
-#    Updated: 2025/04/29 16:14:49 by abeaufil         ###   ########.fr        #
+#    Updated: 2025/04/30 13:50:58 by abeaufil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ OBJ_PATH = objet/
 SRC		=	\
 			utils/utils_1.c \
 			utils/tokens.c \
+			utils/init.c \
 			\
 			parsing/parsing_1.c \
 			\
