@@ -6,7 +6,7 @@
 /*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 17:42:19 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/04/30 17:27:39 by abeaufil         ###   ########.fr       */
+/*   Updated: 2025/05/01 11:45:15 by abeaufil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ typedef enum e_token_type
 	PIPE,
 	REDIR_IN,
 	REDIR_OUT,
-	HERE_DOC
+	HERE_DOC,
+	APPEND
 }	t_token_type;
 
 //	parsing

@@ -6,7 +6,7 @@
 /*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 16:43:48 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/04/30 17:40:09 by abeaufil         ###   ########.fr       */
+/*   Updated: 2025/05/01 11:40:01 by abeaufil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,16 +81,16 @@ int	check_special_characters(char *line)
 int	check_syntax(char *line)
 {
 	if (check_quotes(line))
-		return (write(2, "Error: Unmatched quotes\n", 24), 1);
-	if (check_pipe(line) > 1)
-		return (write(2, "Error: Too many pipes\n", 22), 1);
-	if (check_redirection(line) > 2)
-		return (write(2, "Error: Too many redirections\n", 29), 1);
+		return (write(2, "Error: Unmatched quotes\n\n", 24), 1);
+	// if (check_pipe(line) > 1)
+	// 	return (write(2, "Error: Too many pipes\n\n", 22), 1);
+	// if (check_redirection(line) > 2)
+	// 	return (write(2, "Error: Too many redirections\n\n", 30), 1);
 	if (check_special_characters(line))
-		return (write(2, "Error: Invalid special characters\n", 34), 1);
-	if (line[0] == '|' || line[0] == ';' || line[0] == '>' || line[0] == '<')
-		return (write(2, "Error: Command cannot start with a pipe or semicolon or a redirection\n", 70), 1);
+		return (write(2, "Error: Invalid special characters\n\n", 34), 1);
+	// if (line[0] == '|' || line[0] == ';' || line[0] == '>' || line[0] == '<')
+	// 	return (write(2, "Error: Command cannot start with a pipe or semicolon or a redirection\n\n", 70), 1);
 	if (line[0] == '\n')
-		return (write(2, "Error: Empty command\n", 21), 1);
+		return (write(2, "Error: Empty command\n\n", 21), 1);
 	return (0);
 }

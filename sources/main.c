@@ -6,7 +6,7 @@
 /*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 17:38:01 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/04/30 18:42:10 by abeaufil         ###   ########.fr       */
+/*   Updated: 2025/05/01 11:44:40 by abeaufil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ t_token_type	get_token_type(char *token)
 		return (REDIR_OUT);
 	if (token[0] == '<' && token[1] == '<' && token[2] == '\0')
 		return (HERE_DOC);
+	if (token[0] == '>' && token[1] == '>' && token[2] == '\0')
+		return (APPEND);
 	return (WORD);
 }
 
@@ -37,6 +39,8 @@ char	*get_token_type_str(t_token_type type)
 		return ("REDIR_OUT");
 	if (type == HERE_DOC)
 		return ("HERE_DOC");
+	if (type == APPEND)
+		return ("APPEND");
 	return ("WORD");
 }
 
@@ -45,7 +49,7 @@ void	print_debug_info(char *line, char **tokens)
 	int				i;
 	t_token_type	type;
 
-	printf("---------- Input ----------\n");
+	printf("\n---------- Input ----------\n");
 	if (line)
 		printf("[%s]\n", line);
 	else
