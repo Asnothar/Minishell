@@ -39,6 +39,7 @@ typedef struct s_cmd
 typedef struct s_shell
 {
 	char			**envp;	// Copie de l'environnement
+	t_env			*envp;
 	char			*input;	// Ligne de commande entrée par l'utilisateur
 	struct s_cmd	*cmds;	// Liste chaînée de commandes parsées
 	int				last_exit_status;	// Code de retour de la dernière commande exécutée
