@@ -25,6 +25,7 @@
 # include <termios.h>
 # include <sys/ioctl.h>
 # include <termcap.h>
+# include <stdbool.h>
 
 typedef struct s_cmd
 {
