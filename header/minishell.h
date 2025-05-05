@@ -78,6 +78,8 @@ int		check_pipe(char *line);
 int		check_redirection(char *line);
 int		check_special_characters(char *line);
 int		check_syntax(char *line);
+//              parsing2.c
+void	err_message(char *message1, char *message2, char *message3);
 
 //	utils
 //		init.c
