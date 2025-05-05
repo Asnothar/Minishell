@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+         #
+#    By: sjupille <sjupille@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/04 11:47:43 by abeaufil          #+#    #+#              #
-#    Updated: 2025/04/30 17:26:59 by abeaufil         ###   ########.fr        #
+#    Updated: 2025/05/05 14:43:22 by sjupille         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,10 @@ SRC		=	\
 			utils/tokens.c \
 			utils/init.c \
 			utils/signal.c \
-			\
+			builtins/ft_cd.c\
+			builtins/ft_echo.c\
+			builtins/ft_env.c\
+			builtins/ft_pwd.c\
 			parsing/parsing_1.c \
 			\
 			main.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sjupille <sjupille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 17:42:19 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/05/01 11:45:15 by abeaufil         ###   ########.fr       */
+/*   Updated: 2025/05/05 14:41:03 by sjupille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@
 # include <termcap.h>
 # include <stdbool.h>
 
+#ifndef PATH_MAX    // macro pour gerer les chemins absolus dans l envp
+# define PATH_MAX 1024
+#endif
+
+
 typedef struct s_cmd
 {
 	char			**args;	// Arguments de la commande (argv)
@@ -39,10 +44,13 @@ typedef struct s_cmd
 
 typedef struct s_shell
 {
-	char			**envp;	// Copie de l'environnement
-	t_env			*envp;
+	char			**env;	// Copie de l'environnement
+	t_env			*envp;  // Copie de l environnement en liste chainee
 	char			*input;	// Ligne de commande entrée par l'utilisateur
 	struct s_cmd	*cmds;	// Liste chaînée de commandes parsées
+	char			*infile;
+	char			*outfile;
+	int				isbuiltin;
 	int				last_exit_status;	// Code de retour de la dernière commande exécutée
 }	t_shell;
 
@@ -91,5 +99,21 @@ void	setup_signals(void);
 //		utils1.c
 int		skip_whitespaces(const char *str, int i, int len);
 void	print_tokens(char **tokens);
+//  builtins
+//      ft_cd.c
+void	cd_absolute(t_shell *minishell);
+void	cd_relative(t_shell *minishell);
+void	cd_home(t_shell *minishell);
+void	cd_tilde(t_shell *minishell, char *arg);
+void	ft_cd(t_shell *minishell);
+//      ft_echo.c
+void	ft_echo(t_shell *minishell);
+//      ft_env.c
+char	*ft_getenv(t_env *envp, const char *name);
+void	ft_update_envp(t_env *envp, const char *name, const char *value);
+void	ft_env(t_shell *minishell);
+//      ft_pwd.c
+void	cd_oldpwd(t_shell *minishell);
+int		pwd(void);
 
 #endif
