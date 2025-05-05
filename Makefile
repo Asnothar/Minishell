@@ -35,7 +35,7 @@ SRC		=	\
 			builtins/ft_env.c\
 			builtins/ft_pwd.c\
 			parsing/parsing_1.c \
-			\
+			parsing/parsing2.c\
 			main.c \
 
 SRCS	= $(addprefix $(SRC_PATH), $(SRC))
