@@ -8,7 +8,7 @@ t_env	*get_newnode(char *key, t_env *envp)
 
 	tmp = malloc(sizeof(t_env));
 	if (!tmp)
-		exit(1);
+		return (NULL);
 	tmp->key = key;
 	tmp->value = NULL;
 	tmp->next = NULL;
