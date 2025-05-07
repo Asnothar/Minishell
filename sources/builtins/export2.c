@@ -1,6 +1,6 @@
 
 
-
+#include "../../header/minishell.h"
 
 t_env	*get_newnode(char *key, t_env *envp)
 {
