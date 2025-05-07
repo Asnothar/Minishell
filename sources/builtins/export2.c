@@ -74,7 +74,7 @@ void	export(t_shell *minishell)
 	while (minishell->cmds->args[i])
 	{
 		if ((minishell->cmds->args[i][0] && (minishell->cmds->args[i][0] == '='
-			|| ft_strstr_alt(minishell->cmds->args[i], " =")))
+			|| ft_strstr(minishell->cmds->args[i], " =")))
 			|| !valid_export_arg(minishell->cmds->args[i]))
 		{
 			err_message("minishell: export: `", minishell->cmds->args[i],
