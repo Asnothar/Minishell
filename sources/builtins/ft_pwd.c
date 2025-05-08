@@ -3,38 +3,26 @@
 
 #include "../../header/minishell.h"
 
-void	cd_oldpwd(t_shell *minishell)
+void	set_pwd(t_shell *minishell, char *old, char *new)
 {
 	t_env	*env;
-	char	path[PATH_MAX];
-	char	path2[PATH_MAX];
-	char	*oldpwd;
 
 	env = minishell->envp;
 	while (env)
 	{
-		if (ft_strcmp(env->key, "OLDPWD") == 0)
+		if (ft_strcmp(env->key, "PWD") == 0)
 		{
-			oldpwd = env->value;
-			if (chdir(oldpwd) == -1)
-			{
-				perror("cd");
-				minishell->last_exit_status = 1;
-				return;
-			}
-			printf("%s\n", oldpwd);
-			ft_pwd(minishell, getcwd(path, PATH_MAX), getcwd(path2, PATH_MAX));
-			ft_update_envp(minishell->envp, "OLDPWD", path);
-			ft_update_envp(minishell->envp, "PWD", path2);
-			minishell->last_exit_status = 0;
-			return;
+			free(env->value);
+			env->value = ft_strdup(new);
+		}
+		else if (ft_strcmp(env->key, "OLDPWD") == 0)
+		{
+			free(env->value);
+			env->value = ft_strdup(old);
 		}
 		env = env->next;
 	}
-	ft_putstr_fd("cd: OLDPWD not set\n", 2);
-	minishell->last_exit_status = 1;
 }
-
 int	ft_pwd(void)
 {
 	char	path[PATH_MAX];
