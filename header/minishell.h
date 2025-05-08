@@ -6,12 +6,20 @@
 /*   By: sjupille <sjupille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 17:42:19 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/05/05 14:41:03 by sjupille         ###   ########.fr       */
+/*   Updated: 2025/05/01 17:15:48 by abeaufil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
+# define RED "\033[31m"
+# define GREEN "\033[32m"
+# define YELLOW "\033[33m"
+# define BLUE "\033[34m"
+# define MAGENTA "\033[35m"
+# define CYAN "\033[36m"
+# define RESET "\033[0m"
 
 # include "../sources/ultimate_libft/header/ultimate_libft.h"
 
@@ -61,6 +69,12 @@ typedef struct s_env
 	struct s_env	*next;	// Prochain élément de la liste chaînée
 }	t_env;
 
+typedef struct s_token
+{
+	char			*value;
+	struct s_token	*next;
+}	t_token;
+
 typedef enum e_token_type
 {
 	WORD,
@@ -68,7 +82,7 @@ typedef enum e_token_type
 	REDIR_IN,
 	REDIR_OUT,
 	HERE_DOC,
-	APPEND
+	APPEND,
 }	t_token_type;
 
 //	parsing
@@ -88,19 +102,21 @@ t_shell	*init_shell(void);
 t_env	*init_env(void);
 void	free_cmd(t_cmd *cmd);
 void	start_init(void);
-//		tokens.c
-char	*handle_quotes(const char *line, size_t *i, size_t len);
-char	*handle_special_characters(const char *line, size_t *i);
-char	**initialize_tokens(size_t len);
-char	*process_token(const char *line, size_t *i, size_t len);
-char	**tokenize_input(const char *line);
 //		signal.c
 void	handle_sigint(int sig);
 void	handle_sigquit(int sig);
 void	setup_signals(void);
-//		utils1.c
+//		tokens.c
+char	*handle_quotes(const char *line, size_t *i, size_t len);
+char	*handle_special_characters(const char *line, size_t *i);
+char	*process_token(const char *line, size_t *i, size_t len);
+t_token	*create_token_node(char *value);
+void	add_token_back(t_token **head, t_token *new);
+t_token	*tokenize_input(const char *line);
+//		utils_1.c
 int		skip_whitespaces(const char *str, int i, int len);
 void	print_tokens(char **tokens);
+<<<<<<< HEAD
 //  builtins
 //      ft_cd.c
 void	cd_absolute(t_shell *minishell);
@@ -117,5 +133,9 @@ void	ft_env(t_shell *minishell);
 //      ft_pwd.c
 void	cd_oldpwd(t_shell *minishell);
 int		pwd(void);
+=======
+void	free_split(char **split);
+void	free_token_list(t_token *head);
+>>>>>>> e0d5f75 (Sauvegarde Locale avant pull)
 
 #endif

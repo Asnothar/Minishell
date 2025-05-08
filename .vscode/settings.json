@@ -1,0 +1,7 @@
+{
+	"files.associations": {
+		"ultimate_libft.h": "c",
+		"history.h": "c",
+		"readline.h": "c"
+	}
+}

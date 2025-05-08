@@ -6,7 +6,7 @@
 /*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 16:11:31 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/04/29 16:25:09 by abeaufil         ###   ########.fr       */
+/*   Updated: 2025/05/01 16:43:39 by abeaufil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,31 @@ char	*handle_special_characters(const char *line, size_t *i)
 	}
 }
 
-char	**initialize_tokens(size_t len)
+t_token	*create_token_node(char *value)
 {
-	char	**tokens;
+	t_token	*node;
 
-	tokens = malloc(sizeof(char *) * (len + 1));
-	if (!tokens)
+	node = malloc(sizeof(t_token));
+	if (!node)
 		return (NULL);
-	return (tokens);
+	node->value = value;
+	node->next = NULL;
+	return (node);
+}
+
+void	add_token_back(t_token **head, t_token *new)
+{
+	t_token	*tmp;
+
+	if (!*head)
+	{
+		*head = new;
+		return ;
+	}
+	tmp = *head;
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = new;
 }
 
 char	*process_token(const char *line, size_t *i, size_t len)
@@ -73,25 +90,29 @@ char	*process_token(const char *line, size_t *i, size_t len)
 	}
 }
 
-char	**tokenize_input(const char *line)
+t_token	*tokenize_input(const char *line)
 {
 	size_t	i;
-	size_t	j;
 	size_t	len;
-	char	**tokens;
+	char	*token_str;
+	t_token	*token_list;
+	t_token	*new_node;
 
 	i = 0;
-	j = 0;
 	len = strlen(line);
-	tokens = initialize_tokens(len);
-	if (!tokens)
-		return (NULL);
+	token_list = NULL;
 	while (i < len)
 	{
 		i = skip_whitespaces(line, i, len);
-		tokens[j] = process_token(line, &i, len);
-		j++;
+		if (i >= len)
+			break ;
+		token_str = process_token(line, &i, len);
+		if (!token_str)
+			continue ;
+		new_node = create_token_node(token_str);
+		if (!new_node)
+			continue ;
+		add_token_back(&token_list, new_node);
 	}
-	tokens[j] = NULL;
-	return (tokens);
+	return (token_list);
 }

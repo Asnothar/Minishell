@@ -6,7 +6,7 @@
 /*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 17:19:11 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/04/30 17:31:10 by abeaufil         ###   ########.fr       */
+/*   Updated: 2025/05/01 17:23:43 by abeaufil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	handle_sigint(int sig)
 {
 	(void)sig;
-	write(1, "\nminishell> ", 12);
+	write(1, "\033[36m\nminishell> \033[0m", 22);
 }
 
 void	handle_sigquit(int sig)

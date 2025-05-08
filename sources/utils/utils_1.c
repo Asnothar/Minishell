@@ -6,7 +6,7 @@
 /*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:39:30 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/04/30 17:28:54 by abeaufil         ###   ########.fr       */
+/*   Updated: 2025/05/01 16:57:53 by abeaufil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,31 @@ void	free_cmd(t_cmd *cmd)
 		free(cmd->outfile);
 		free(cmd->heredoc_delim);
 		free(cmd);
+	}
+}
+
+void	free_split(char **split)
+{
+	int	i;
+
+	i = 0;
+	while (split[i])
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
+}
+
+void	free_token_list(t_token *head)
+{
+	t_token	*tmp;
+
+	while (head)
+	{
+		tmp = head;
+		head = head->next;
+		free(tmp->value);
+		free(tmp);
 	}
 }

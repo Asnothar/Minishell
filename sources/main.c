@@ -6,7 +6,7 @@
 /*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 17:38:01 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/05/01 11:44:40 by abeaufil         ###   ########.fr       */
+/*   Updated: 2025/05/01 17:14:54 by abeaufil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*get_token_type_str(t_token_type type)
 	return ("WORD");
 }
 
-void	print_debug_info(char *line, char **tokens)
+void	print_debug_info(char *line, t_token *tokens)
 {
 	int				i;
 	t_token_type	type;
@@ -58,10 +58,11 @@ void	print_debug_info(char *line, char **tokens)
 	if (tokens)
 	{
 		i = 0;
-		while (tokens[i])
+		while (tokens)
 		{
-			type = get_token_type(tokens[i]);
-			printf("Token[%d]: [%s] (%s)\n", i, tokens[i], get_token_type_str(type));
+			type = get_token_type(tokens->value);
+			printf("Token[%d]: [%s] (%s)\n", i, tokens->value, get_token_type_str(type));
+			tokens = tokens->next;
 			i++;
 		}
 	}
@@ -70,24 +71,12 @@ void	print_debug_info(char *line, char **tokens)
 	printf("---------- END ----------\n\n\n");
 }
 
-
-void free_split(char **split)
-{
-	int i;
-
-	i = 0;
-	while (split[i])
-	{
-		free(split[i]);
-		i++;
-	}
-	free(split);
-}
 int	main(int argc, char **argv, char **envp)
 {
-	char	*line;
-	char	**tokens = NULL;
+	char		*line;
+	t_token		*tokens;
 
+	tokens = NULL;
 	(void)argc;
 	(void)argv;
 	(void)envp;
@@ -95,11 +84,11 @@ int	main(int argc, char **argv, char **envp)
 	setup_signals();
 	while (1)
 	{
-		line = readline("minishell> ");
+		line = readline(CYAN"minishell> "RESET);
 		if (!line)
 		{
 			if (tokens)
-				free_split(tokens);
+				free_token_list(tokens);
 			write(1, "exit\n", 5);
 			break ;
 		}
@@ -110,18 +99,17 @@ int	main(int argc, char **argv, char **envp)
 		if (check_syntax(line))
 		{
 			free(line);
+			free_token_list(tokens);
 			continue ;
 		}
 		if (strcmp(line, "exit") == 0)
 		{
-			if (tokens)
-				free_split(tokens);
+			free_token_list(tokens);
 			free(line);
 			break ;
 		}
 		free(line);
-		if (tokens)
-			free_split(tokens);
+		free_token_list(tokens);
 	}
 	return (0);
 }
