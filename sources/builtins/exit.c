@@ -10,7 +10,7 @@ void	basic_exit(t_shell *minishell)
 	tcgetattr(STDIN_FILENO, &old_tio);
 	if (ft_strcmp(minishell->cmds->args[0], "exit") == 0 && !(minishell->cmds->args[1]))
 	{
-		minishell->is_builtin = 1;
+		minishell->isbuiltin = 1;
 		write(STDOUT_FILENO, "exit\n", 5);
 		exit(minishell->last_exit_status);
 	}
@@ -54,11 +54,11 @@ static void	nb_len_error(char *str, unsigned long long nbr, int sign)
 		ft_putstr_fd(str, 2);
 		ft_putstr_fd(": numeric argument required\n", 2);
 		exit_status = 255;
-		exit (exit_status);
+		exit(exit_status);
 	}
 }
 
-int	ft_atoll(char *str)
+int	ft_atol(char *str)
 {
 	size_t				i;
 	unsigned long long	nbr;
@@ -87,7 +87,7 @@ int	ft_atoll(char *str)
 	return (nbr);
 }
 
-void	exit(t_minishell *minishell, int is_in_fork, int print)
+void	ft_exit(t_shell *minishell, int is_in_fork, int print)
 {
 	if (is_in_fork != 1)
 		printf("exit\n");
