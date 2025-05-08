@@ -44,6 +44,7 @@ void	free_cmd(t_cmd *cmd)
 	}
 }
 
+<<<<<<< HEAD
 void	free_split(char **split)
 {
 	int	i;
@@ -68,4 +69,24 @@ void	free_token_list(t_token *head)
 		free(tmp->value);
 		free(tmp);
 	}
+=======
+int	ft_strcase(char *str, char *with_whom)
+{
+	int		i;
+	char	*str1;
+
+	str1 = ft_strdup(str);
+	i = 0;
+	if (!str1)
+		return (0);
+	while (str1[i])
+	{
+		if (str1[i] >= 'A' && str1[i] <= 'Z')
+			str1[i] += 32;
+		i++;
+	}
+	i = ft_strcmp(str1, with_whom);
+	free(str1);
+	return (i);
+>>>>>>> seb
 }
