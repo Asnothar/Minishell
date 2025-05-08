@@ -1,7 +1,7 @@
 
 
 
-
+#include "../../header/minishell.h"
 
 void	basic_exit(t_shell *minishell)
 {
