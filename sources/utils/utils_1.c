@@ -59,6 +59,8 @@ void	free_token_list(t_token *head)
 		free(tmp->value);
 		free(tmp);
 	}
+}
+
 int	ft_strcase(char *str, char *with_whom)
 {
 	int		i;
