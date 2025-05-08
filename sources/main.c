@@ -6,7 +6,7 @@
 /*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 17:38:01 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/05/01 17:14:54 by abeaufil         ###   ########.fr       */
+/*   Updated: 2025/05/08 13:52:43 by abeaufil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,8 @@ void	print_debug_info(char *line, t_token *tokens)
 int	main(int argc, char **argv, char **envp)
 {
 	char		*line;
-	t_token		*tokens;
+	t_token		*tokens = NULL;
 
-	tokens = NULL;
 	(void)argc;
 	(void)argv;
 	(void)envp;
@@ -84,7 +83,7 @@ int	main(int argc, char **argv, char **envp)
 	setup_signals();
 	while (1)
 	{
-		line = readline(CYAN"minishell> "RESET);
+		line = readline("minishell> ");
 		if (!line)
 		{
 			if (tokens)

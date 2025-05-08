@@ -6,11 +6,38 @@
 /*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 16:11:31 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/05/01 16:43:39 by abeaufil         ###   ########.fr       */
+/*   Updated: 2025/05/08 13:57:53 by abeaufil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
+
+t_token	*create_token_node(char *value)
+{
+	t_token	*node;
+
+	node = malloc(sizeof(t_token));
+	if (!node)
+		return (NULL);
+	node->value = value;
+	node->next = NULL;
+	return (node);
+}
+
+void	add_token_back(t_token **head, t_token *new)
+{
+	t_token	*tmp;
+
+	if (!*head)
+	{
+		*head = new;
+		return ;
+	}
+	tmp = *head;
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = new;
+}
 
 char	*handle_quotes(const char *line, size_t *i, size_t len)
 {
@@ -44,33 +71,6 @@ char	*handle_special_characters(const char *line, size_t *i)
 		(*i)++;
 		return (token);
 	}
-}
-
-t_token	*create_token_node(char *value)
-{
-	t_token	*node;
-
-	node = malloc(sizeof(t_token));
-	if (!node)
-		return (NULL);
-	node->value = value;
-	node->next = NULL;
-	return (node);
-}
-
-void	add_token_back(t_token **head, t_token *new)
-{
-	t_token	*tmp;
-
-	if (!*head)
-	{
-		*head = new;
-		return ;
-	}
-	tmp = *head;
-	while (tmp->next)
-		tmp = tmp->next;
-	tmp->next = new;
 }
 
 char	*process_token(const char *line, size_t *i, size_t len)

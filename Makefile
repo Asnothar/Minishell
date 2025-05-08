@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sjupille <sjupille@student.42.fr>          +#+  +:+       +#+         #
+#    By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/04 11:47:43 by abeaufil          #+#    #+#              #
-#    Updated: 2025/05/05 14:43:22 by sjupille         ###   ########.fr        #
+#    Updated: 2025/05/08 13:55:10 by abeaufil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ SRC		=	\
 			builtins/ft_env.c\
 			builtins/ft_pwd.c\
 			parsing/parsing_1.c \
-			parsing/parsing2.c\
+			parsing/parsing_2.c\
 			main.c \
 
 SRCS	= $(addprefix $(SRC_PATH), $(SRC))
