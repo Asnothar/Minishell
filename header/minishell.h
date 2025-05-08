@@ -126,6 +126,6 @@ void	ft_update_envp(t_env *envp, const char *name, const char *value);
 void	ft_env(t_shell *minishell);
 //      ft_pwd.c
 void	cd_oldpwd(t_shell *minishell);
-int		pwd(void);
+int	ft_pwd(void);
 
 #endif
