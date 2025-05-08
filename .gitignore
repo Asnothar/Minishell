@@ -1,0 +1,5 @@
+# Ignorer les fichiers objets
+*.o
+
+# Ignorer le dossier objet/
+objet/
