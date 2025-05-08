@@ -3,3 +3,6 @@
 
 # Ignorer le dossier objet/
 objet/
+
+# Ignorer l'executable minishell
+minishell
