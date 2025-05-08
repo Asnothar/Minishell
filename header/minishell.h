@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjupille <sjupille@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 17:42:19 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/05/01 17:15:48 by abeaufil         ###   ########.fr       */
+/*   Updated: 2025/05/08 13:27:24 by abeaufil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,13 @@ typedef struct s_cmd
 	struct s_cmd	*next;	// Commande suivante (pour pipe ou multiples commandes)
 }	t_cmd;
 
+typedef struct s_env
+{
+	char			*key;	// Clé de l'environnement
+	char			*value;	// Valeur de l'environnement
+	struct s_env	*next;	// Prochain élément de la liste chaînée
+}	t_env;
+
 typedef struct s_shell
 {
 	char			**env;	// Copie de l'environnement
@@ -61,13 +68,6 @@ typedef struct s_shell
 	int				isbuiltin;
 	int				last_exit_status;	// Code de retour de la dernière commande exécutée
 }	t_shell;
-
-typedef struct s_env
-{
-	char			*key;	// Clé de l'environnement
-	char			*value;	// Valeur de l'environnement
-	struct s_env	*next;	// Prochain élément de la liste chaînée
-}	t_env;
 
 typedef struct s_token
 {
@@ -116,7 +116,9 @@ t_token	*tokenize_input(const char *line);
 //		utils_1.c
 int		skip_whitespaces(const char *str, int i, int len);
 void	print_tokens(char **tokens);
-<<<<<<< HEAD
+void	free_split(char **split);
+void	free_token_list(t_token *head);
+
 //  builtins
 //      ft_cd.c
 void	cd_absolute(t_shell *minishell);
@@ -133,9 +135,5 @@ void	ft_env(t_shell *minishell);
 //      ft_pwd.c
 void	cd_oldpwd(t_shell *minishell);
 int		pwd(void);
-=======
-void	free_split(char **split);
-void	free_token_list(t_token *head);
->>>>>>> e0d5f75 (Sauvegarde Locale avant pull)
 
 #endif
