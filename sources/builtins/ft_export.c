@@ -31,7 +31,7 @@ t_env	*find_min(t_env *envp, t_env *prev_min)
 	return (min);
 }
 
-void	print_export(t_env *envp)
+void	ft_print_export(t_env *envp)
 {
 	int		len;
 	t_env	*prev_min;
