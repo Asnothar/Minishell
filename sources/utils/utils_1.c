@@ -1,14 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   utils_1.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 15:39:30 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/05/08 13:57:28 by abeaufil         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+
+
 
 #include "../../header/minishell.h"
 
@@ -44,7 +35,6 @@ void	free_cmd(t_cmd *cmd)
 	}
 }
 
-<<<<<<< HEAD
 void	free_split(char **split)
 {
 	int	i;
@@ -69,7 +59,6 @@ void	free_token_list(t_token *head)
 		free(tmp->value);
 		free(tmp);
 	}
-=======
 int	ft_strcase(char *str, char *with_whom)
 {
 	int		i;
@@ -88,5 +77,4 @@ int	ft_strcase(char *str, char *with_whom)
 	i = ft_strcmp(str1, with_whom);
 	free(str1);
 	return (i);
->>>>>>> seb
 }
