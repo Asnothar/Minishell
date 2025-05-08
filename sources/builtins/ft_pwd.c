@@ -35,7 +35,7 @@ void	cd_oldpwd(t_shell *minishell)
 	minishell->last_exit_status = 1;
 }
 
-int	pwd(void)
+int	ft_pwd(void)
 {
 	char	path[PATH_MAX];
 
