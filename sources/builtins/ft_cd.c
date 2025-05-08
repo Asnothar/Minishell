@@ -24,7 +24,7 @@ void	cd_absolute(t_shell *minishell)
 		minishell->last_exit_status = 1;
 		return ;
 	}
-	ft_pwd(minishell, old, new);
+	set_pwd(minishell, old, new);
 	ft_update_envp(minishell->envp, "OLDPWD", old);
 	ft_update_envp(minishell->envp, "PWD", new);
 	minishell->last_exit_status = 0;
@@ -51,7 +51,7 @@ void	cd_relative(t_shell *minishell)
 		minishell->last_exit_status = 1;
 		return;
 	}
-	ft_pwd(minishell, old, new);
+	set_pwd(minishell, old, new);
 	ft_update_envp(minishell->envp, "OLDPWD", old);
 	ft_update_envp(minishell->envp, "PWD", new);
 	minishell->last_exit_status = 0;
@@ -120,8 +120,6 @@ void	ft_cd(t_shell *minishell)
 		cd_absolute(minishell);
 	else if (arg[0] == '~')           
 		cd_tilde(minishell, arg);
-	else if (arg[0] == '-' && !arg[1])
-		cd_oldpwd(minishell);
 	else                                
 		cd_relative(minishell);
 }
