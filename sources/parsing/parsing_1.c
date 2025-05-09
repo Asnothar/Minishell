@@ -3,85 +3,37 @@
 
 #include "../../header/minishell.h"
 
-int	check_quotes(char *line)
+int	parse(t_shell *shell)
 {
-	int	i;
-	int	single_quote;
-	int	double_quote;
-
-	i = 0;
-	single_quote = 0;
-	double_quote = 0;
-	while (line[i])
-	{
-		if (line[i] == '\'' && double_quote == 0)
-			single_quote = !single_quote;
-		else if (line[i] == '\"' && single_quote == 0)
-			double_quote = !double_quote;
-		i++;
-	}
-	return (single_quote || double_quote);
+	if (!shell || !shell->tokens)
+		return (1);
+	return (command_type(shell));
 }
 
-int	check_pipe(char *line)
+int	command_type(t_shell *shell)
 {
-	int	i;
-	int	pipe_count;
+	char	*cmd;
 
-	i = 0;
-	pipe_count = 0;
-	while (line[i])
-	{
-		if (line[i] == '|')
-			pipe_count++;
-		i++;
-	}
-	return (pipe_count);
-}
-
-int	check_redirection(char *line)
-{
-	int	i;
-	int	redirection_count;
-
-	i = 0;
-	redirection_count = 0;
-	while (line[i])
-	{
-		if (line[i] == '>' || line[i] == '<')
-			redirection_count++;
-		i++;
-	}
-	return (redirection_count);
-}
-
-int	check_special_characters(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] == ';' || line[i] == '\\')
-			return (1);
-		i++;
-	}
+	cmd = shell->tokens->value;
+	if (!cmd)
+		return (1);
+	// if (ft_strncmp(cmd, "pwd", 4) == 0)
+	// 	return (ft_pwd(shell));
+	// if (ft_strncmp(cmd, "cd", 3) == 0)
+	// 	return (ft_cd(shell));
+	// if (ft_strncmp(cmd, "echo", 5) == 0)
+	// 	return (ft_echo(shell));
+	// if (ft_strncmp(cmd, "env", 4) == 0)
+	// 	return (ft_env(shell));
+	// if (ft_strncmp(cmd, "exit", 5) == 0)
+	// 	return (ft_exit(shell));
+	// if (ft_strncmp(cmd, "export", 7) == 0)
+	// 	return (ft_export(shell));
+	// if (ft_strncmp(cmd, "unset", 6) == 0)
+	// 	return (ft_unset(shell));
+	// if (ft_strncmp(cmd, "./", 2) == 0)
+	// 	return (ft_executable(shell));
+	// return (launch_system_command(shell));
 	return (0);
 }
 
-int	check_syntax(char *line)
-{
-	if (check_quotes(line))
-		return (write(2, "Error: Unmatched quotes\n\n", 24), 1);
-	// if (check_pipe(line) > 1)
-	// 	return (write(2, "Error: Too many pipes\n\n", 22), 1);
-	// if (check_redirection(line) > 2)
-	// 	return (write(2, "Error: Too many redirections\n\n", 30), 1);
-	if (check_special_characters(line))
-		return (write(2, "Error: Invalid special characters\n\n", 34), 1);
-	// if (line[0] == '|' || line[0] == ';' || line[0] == '>' || line[0] == '<')
-	// 	return (write(2, "Error: Command cannot start with a pipe or semicolon or a redirection\n\n", 70), 1);
-	if (line[0] == '\n')
-		return (write(2, "Error: Empty command\n\n", 21), 1);
-	return (0);
-}

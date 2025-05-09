@@ -23,18 +23,6 @@ void	print_tokens(char **tokens)
 	}
 }
 
-void	free_cmd(t_cmd *cmd)
-{
-	if (cmd)
-	{
-		free(cmd->args);
-		free(cmd->infile);
-		free(cmd->outfile);
-		free(cmd->heredoc_delim);
-		free(cmd);
-	}
-}
-
 void	free_split(char **split)
 {
 	int	i;
@@ -61,6 +49,28 @@ void	free_token_list(t_token *head)
 	}
 }
 
+void	free_shell(t_shell *shell)
+{
+	if (!shell)
+		return ;
+	free_env_list(shell->envp);
+	free(shell);
+}
+void	free_env_list(t_env *head)
+{
+	t_env	*tmp;
+
+	while (head)
+	{
+		tmp = head;
+		head = head->next;
+		free(tmp->key);
+		free(tmp->value);
+		free(tmp);
+	}
+}
+
+
 int	ft_strcase(char *str, char *with_whom)
 {
 	int		i;
@@ -76,7 +86,7 @@ int	ft_strcase(char *str, char *with_whom)
 			str1[i] += 32;
 		i++;
 	}
-	i = ft_strcmp(str1, with_whom);
+	i = strcmp(str1, with_whom);
 	free(str1);
 	return (i);
 }
