@@ -113,7 +113,7 @@ char	*ft_getenv(t_env *envp, const char *name);
 void	ft_update_envp(t_env *envp, const char *name, const char *value);
 void	ft_env(t_shell *minishell);
 //      ft_pwd.c
-void	set_pwd(t_minishell *minishell, char *old, char *new);
+void	set_pwd(t_shell *minishell, char *old, char *new);
 int		ft_pwd(void);
 
 #endif

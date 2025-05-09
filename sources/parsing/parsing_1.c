@@ -17,8 +17,8 @@ int	command_type(t_shell *shell)
 	cmd = shell->tokens->value;
 	if (!cmd)
 		return (1);
-	// if (ft_strncmp(cmd, "pwd", 4) == 0)
-	// 	return (ft_pwd(shell));
+	if (ft_strncmp(cmd, "pwd", 4) == 0)
+		return (ft_pwd());
 	// if (ft_strncmp(cmd, "cd", 3) == 0)
 	// 	return (ft_cd(shell));
 	// if (ft_strncmp(cmd, "echo", 5) == 0)

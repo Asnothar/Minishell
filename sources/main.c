@@ -88,8 +88,7 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		}
 		print_debug_info(line, shell->tokens);
-		// if (parse(shell) == 0)
-		// 	exec_line(shell);
+		parse(shell);
 		free(line);
 		free_token_list(shell->tokens);
 		shell->tokens = NULL;
