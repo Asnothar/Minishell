@@ -40,7 +40,7 @@ void	print_debug_info(char *line, t_token *tokens)
 	int				i;
 	t_token_type	type;
 
-	printf("\n---------- Input ----------\n");
+	printf("\033[33m\n---------- Input -----------\n");
 	if (line)
 		printf("[%s]\n", line);
 	else
@@ -59,7 +59,7 @@ void	print_debug_info(char *line, t_token *tokens)
 	}
 	else
 		printf("No tokens\n");
-	printf("---------- END ----------\n\n\n");
+	printf("----------- END ------------\033[0m\n\n\n");
 }
 
 int	main(int argc, char **argv, char **envp)
