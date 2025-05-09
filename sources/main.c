@@ -65,41 +65,37 @@ void	print_debug_info(char *line, t_token *tokens)
 int	main(int argc, char **argv, char **envp)
 {
 	char		*line;
-	t_token		*tokens = NULL;
+	t_shell		*shell;
 
 	(void)argc;
 	(void)argv;
-	(void)envp;
-	start_init();
+	shell = start_init(envp);
 	setup_signals();
 	while (1)
 	{
-		line = readline("minishell> ");
+		line = readline(BLUE "minishell> " RESET);
 		if (!line)
 		{
-			if (tokens)
-				free_token_list(tokens);
-			write(1, "exit\n", 5);
+			write(2, "exit\n", 5);
 			break ;
 		}
-		tokens = tokenize_input(line);
-		print_debug_info(line, tokens);
 		if (*line)
 			add_history(line);
-		if (check_syntax(line))
+		shell->tokens = tokenize_input(line);
+		if (!shell->tokens)
 		{
 			free(line);
-			free_token_list(tokens);
 			continue ;
 		}
-		if (strcmp(line, "exit") == 0)
-		{
-			free_token_list(tokens);
-			free(line);
-			break ;
-		}
+		print_debug_info(line, shell->tokens);
+		// if (parse(shell) == 0)
+		// 	exec_line(shell);
 		free(line);
-		free_token_list(tokens);
+		free_token_list(shell->tokens);
+		shell->tokens = NULL;
 	}
+	free_shell(shell);
 	return (0);
 }
+
+

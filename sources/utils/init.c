@@ -3,68 +3,66 @@
 
 #include "../../header/minishell.h"
 
-t_cmd	*init_cmd(void)
+t_env	*init_env_from_envp(char **envp)
 {
-	t_cmd	*cmd;
+	t_env	*head;
+	t_env	*current;
+	int		i;
 
-	cmd = malloc(sizeof(t_cmd));
-	if (!cmd)
-		return (NULL);
-	cmd->args = NULL;
-	cmd->infile = NULL;
-	cmd->outfile = NULL;
-	cmd->heredoc_delim = NULL;
-	cmd->pipe_fd[0] = -1;
-	cmd->pipe_fd[1] = -1;
-	cmd->next = NULL;
-	return (cmd);
+	i = 0;
+	head = NULL;
+	while (envp[i])
+	{
+		t_env *new = malloc(sizeof(t_env));
+		if (!new)
+			return (NULL);
+		new->key = ft_substr(envp[i], 0, ft_strchr(envp[i], '=') - envp[i]);
+		new->value = ft_strdup(ft_strchr(envp[i], '=') + 1);
+		new->next = NULL;
+		if (!head)
+			head = new;
+		else
+		{
+			current = head;
+			while (current->next)
+				current = current->next;
+			current->next = new;
+		}
+		i++;
+	}
+	return (head);
 }
 
-t_shell	*init_shell(void)
+t_shell	*init_shell(char **envp)
 {
-	t_shell	*shell;
+	t_shell *shell;
 
 	shell = malloc(sizeof(t_shell));
 	if (!shell)
 		return (NULL);
-	shell->envp = NULL;
+	shell->envp = init_env_from_envp(envp);
+	if (!shell->envp)
+	{
+		free(shell);
+		return (NULL);
+	}
 	shell->input = NULL;
-	shell->cmds = NULL;
+	shell->tokens = NULL;
+	shell->heredoc_delim = NULL;
+	shell->isbuiltin = 0;
 	shell->last_exit_status = 0;
 	return (shell);
 }
 
-t_env	*init_env(void)
-{
-	t_env	*env;
-
-	env = malloc(sizeof(t_env));
-	if (!env)
-		return (NULL);
-	env->key = NULL;
-	env->value = NULL;
-	env->next = NULL;
-	return (env);
-}
-
-void	start_init(void)
+t_shell	*start_init(char **envp)
 {
 	t_shell	*shell;
-	t_env	*env;
 
-	shell = init_shell();
+	shell = init_shell(envp);
 	if (!shell)
 	{
 		perror("Erreur d'initialisation du shell");
 		exit(EXIT_FAILURE);
 	}
-	env = init_env();
-	if (!env)
-	{
-		perror("Erreur d'initialisation de l'environnement");
-		free(shell);
-		exit(EXIT_FAILURE);
-	}
-	free(shell);
-	free(env);
+	return (shell);
 }

@@ -27,20 +27,9 @@
 # include <termcap.h>
 # include <stdbool.h>
 
-#ifndef PATH_MAX    // macro pour gerer les chemins absolus dans l envp
+#ifndef PATH_MAX    // macro pour gerer les chemins absolus dans l'envp
 # define PATH_MAX 1024
 #endif
-
-
-typedef struct s_cmd
-{
-	char			**args;	// Arguments de la commande (argv)
-	char			*infile;	// Fichier en entrée (<)
-	char			*outfile;	// Fichier en sortie (>)
-	char			*heredoc_delim;	// Délimiteur pour le here_doc (<<)
-	int				pipe_fd[2];	// Pipe vers la commande suivante (si besoin)
-	struct s_cmd	*next;	// Commande suivante (pour pipe ou multiples commandes)
-}	t_cmd;
 
 typedef struct s_env
 {
@@ -49,23 +38,24 @@ typedef struct s_env
 	struct s_env	*next;	// Prochain élément de la liste chaînée
 }	t_env;
 
-typedef struct s_shell
-{
-	char			**env;	// Copie de l'environnement
-	t_env			*envp;  // Copie de l environnement en liste chainee
-	char			*input;	// Ligne de commande entrée par l'utilisateur
-	struct s_cmd	*cmds;	// Liste chaînée de commandes parsées
-	char			*infile;
-	char			*outfile;
-	int				isbuiltin;
-	int				last_exit_status;	// Code de retour de la dernière commande exécutée
-}	t_shell;
-
 typedef struct s_token
 {
 	char			*value;
 	struct s_token	*next;
 }	t_token;
+
+typedef struct s_shell
+{
+	char			**env;	// Copie de l'environnement
+	t_env			*envp;  // Copie de l environnement en liste chainee
+	char			*input;	// Ligne de commande entrée par l'utilisateur
+	t_token			*tokens;
+	char			*infile;
+	char			*outfile;
+	char			*heredoc_delim;	// Délimiteur pour le here_doc (<<)
+	int				isbuiltin;
+	int				last_exit_status;	// Code de retour de la dernière commande exécutée
+}	t_shell;
 
 typedef enum e_token_type
 {
@@ -79,21 +69,16 @@ typedef enum e_token_type
 
 //	parsing
 //		parsing1.c
-int		check_quotes(char *line);
-int		check_pipe(char *line);
-int		check_redirection(char *line);
-int		check_special_characters(char *line);
-int		check_syntax(char *line);
+int 	parse(t_shell *shell);
+int		command_type(t_shell *shell);
 //              parsing2.c
 void	err_message(char *message1, char *message2, char *message3);
 
 //	utils
 //		init.c
-t_cmd	*init_cmd(void);
-t_shell	*init_shell(void);
-t_env	*init_env(void);
-void	free_cmd(t_cmd *cmd);
-void	start_init(void);
+t_env	*init_env_from_envp(char **envp);
+t_shell	*init_shell(char **envp);
+t_shell	*start_init(char **envp);
 //		signal.c
 void	handle_sigint(int sig);
 void	handle_sigquit(int sig);
@@ -110,6 +95,9 @@ int		skip_whitespaces(const char *str, int i, int len);
 void	print_tokens(char **tokens);
 void	free_split(char **split);
 void	free_token_list(t_token *head);
+void	free_shell(t_shell *shell);
+void	free_env_list(t_env *head);
+int		ft_strcase(char *str, char *with_whom);
 
 //  builtins
 //      ft_cd.c
