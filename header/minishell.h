@@ -13,9 +13,8 @@
 # define CYAN "\033[36m"
 # define RESET "\033[0m"
 # define PATH_MAX 1024
-#define LLONG_MAX 9223372036854775807LL
-#define LLONG_MIN (-9223372036854775807LL - 1)
-
+# define LLONG_MAX 9223372036854775807LL
+# define LLONG_MIN (-9223372036854775807LL - 1)
 
 # include "../sources/ultimate_libft/header/ultimate_libft.h"
 
@@ -32,7 +31,6 @@
 # include <stdbool.h>
 # include <limits.h>
 
-
 typedef struct s_env
 {
 	char			*key;	// Clé de l'environnement
@@ -48,15 +46,15 @@ typedef struct s_token
 
 typedef struct s_shell
 {
-	char			**env;	// Copie de l'environnement
-	t_env			*envp;  // Copie de l environnement en liste chainee
-	char			*input;	// Ligne de commande entrée par l'utilisateur
-	t_token			*tokens;
+	char			**env;		// Copie de l'environnement
+	t_env			*envp;		// Copie de l environnement en liste chainee
+	char			*input;		// Ligne de commande entrée par l'utilisateur
+	t_token			*tokens;	// Input apres tokenisation et Lexing, en Liste Chainee
 	char			*infile;
 	char			*outfile;
-	char			*heredoc_delim;	// Délimiteur pour le here_doc (<<)
+	char			*heredoc_delim;
 	int				isbuiltin;
-	int				last_exit_status;	// Code de retour de la dernière commande exécutée
+	int				last_exit_status;
 }	t_shell;
 
 typedef enum e_token_type
@@ -71,7 +69,7 @@ typedef enum e_token_type
 
 //	parsing
 //		parsing1.c
-int 	parse(t_shell *shell);
+int		parse(t_shell *shell);
 int		command_type(t_shell *shell);
 //      parsing2.c
 void	err_message(char *message1, char *message2, char *message3);
@@ -109,7 +107,7 @@ void	cd_home(t_shell *minishell);
 void	cd_tilde(t_shell *minishell, char *arg);
 void	ft_cd(t_shell *minishell);
 //      ft_echo.c
-void	ft_echo(t_shell *minishell);
+int		ft_echo(t_shell *minishell);
 //      ft_env.c
 char	*ft_getenv(t_env *envp, const char *name);
 void	ft_update_envp(t_env *envp, const char *name, const char *value);

@@ -7,7 +7,6 @@
 // {
 // 	t_env	*tmp;
 
-
 // 	tmp = malloc(sizeof(t_env));
 // 	if (!tmp)
 // 		return (NULL);
@@ -19,7 +18,6 @@
 // 	envp->next = tmp;
 // 	return (tmp);
 // }
-
 
 // void	export_change(t_env *envp, char *str, int equal_index)
 // {
@@ -52,7 +50,6 @@
 // int	valid_export_arg(char *str)
 // {
 // 	int	i;
-
 
 // 	if (!str)
 // 		return (0);
@@ -88,7 +85,7 @@
 // 		else
 // 		{
 // 			export_change(minishell->envp, minishell->cmds->args[i], 0);
-// 			minishell->last_exit_status = 0;	
+// 			minishell->last_exit_status = 0;
 // 		}
 // 		i++;
 // 	}

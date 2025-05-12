@@ -96,5 +96,3 @@ int	main(int argc, char **argv, char **envp)
 	free_shell(shell);
 	return (0);
 }
-
-
