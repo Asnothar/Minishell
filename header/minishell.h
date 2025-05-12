@@ -129,6 +129,7 @@ void	ft_update_envp(t_env *envp, const char *name, const char *value);
 void	ft_env(t_shell *minishell);
 //      ft_pwd.c
 void	cd_oldpwd(t_shell *minishell);
+<<<<<<< HEAD
 int		pwd(void);
 //      ft_exit.c
 void	basic_exit(t_shell *minishell);
@@ -142,5 +143,8 @@ void	export(t_shell *minishell);
 int		is_builtin(t_shell *minishell, char **command);
 //      unset.c
 void	unset(t_shell *minishell, char **cmd);
+=======
+int	ft_pwd(void);
+>>>>>>> 9bbcaf99245fbc7689baf3281d68923fc6ca7f82
 
 #endif
