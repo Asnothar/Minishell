@@ -1,9 +1,8 @@
 
 
 
-// #include "../../header/minishell.h"
+// #include "../../header/minishell.h
 
-<<<<<<< HEAD
 // void	unset1(t_shell *minishell, t_env *tmp, t_env *prev, int i)
 // {
 // 	while (tmp)
@@ -55,7 +54,6 @@ static void	unset1(t_shell *minishell, t_env *tmp, t_env *prev, int i)
 		tmp = tmp -> next;
 	}
 }
->>>>>>> seb
 
 // void	unset(t_shell *minishell, char **cmd)
 // {

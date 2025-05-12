@@ -2,16 +2,10 @@
 // // fonction export de base sans options: affichage pur de la liste
 // // trouver la longueur de la liste des variables d'environnement, les classer par ordre alphabetique et les afficher
 
-
-<<<<<<< HEAD
 // int	env_len(t_env *envp)
 // {
 // 	int	i;
-=======
-static int	env_len(t_env *envp)
-{
-	int	i;
->>>>>>> seb
+
 
 // 	i = 0;
 // 	while (envp)
@@ -22,15 +16,11 @@ static int	env_len(t_env *envp)
 // 	return (i);
 // }
 
-<<<<<<< HEAD
+
 // t_env	*find_min(t_env *envp, t_env *prev_min)
 // {
 // 	t_env	*min;
-=======
-static t_env	*find_min(t_env *envp, t_env *prev_min)
-{
-	t_env	*min;
->>>>>>> seb
+
 
 // 	min = NULL;
 // 	while (envp)
