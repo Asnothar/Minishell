@@ -64,21 +64,59 @@ char	*handle_special_characters(const char *line, size_t *i)
 	}
 }
 
+char	*join_and_free(char *s1, char *s2)
+{
+	char	*result;
+	size_t	len;
+
+	if (!s1)
+		return (s2);
+	if (!s2)
+		return (s1);
+	len = ft_strlen(s1) + ft_strlen(s2);
+	result = malloc(len + 1);
+	if (!result)
+	{
+		free(s1);
+		free(s2);
+		return (NULL);
+	}
+	strcpy(result, s1);
+	strcat(result, s2);
+	free(s1);
+	free(s2);
+	return (result);
+}
+
 char	*process_token(const char *line, size_t *i, size_t len)
 {
+	char	*token;
+	char	*fragment;
 	size_t	start;
 
-	if (line[*i] == '"' || line[*i] == '\'')
-		return (handle_quotes(line, i, len));
-	else if (strchr("|<>", line[*i]))
-		return (handle_special_characters(line, i));
-	else
+	token = NULL;
+	while (*i < len && !isspace(line[*i]) && !strchr("|<>", line[*i]))
 	{
-		start = *i;
-		while (*i < len && !isspace(line[*i]) && !strchr("|<>\"'", line[*i]))
-			(*i)++;
-		return (strndup(&line[start], *i - start));
+		if (line[*i] == '"' || line[*i] == '\'')
+			fragment = handle_quotes(line, i, len);
+		else if (!strchr("\"'", line[*i]))
+		{
+			start = *i;
+			while (*i < len && !isspace(line[*i]) && !strchr("|<>\"'", line[*i]))
+				(*i)++;
+			fragment = strndup(&line[start], *i - start);
+		}
+		else
+			break ;
+		if (!fragment)
+			break ;
+		token = join_and_free(token, fragment);
+		if (!token)
+			break ;
 	}
+	if (!token && strchr("|<>", line[*i]))
+		return (handle_special_characters(line, i));
+	return (token);
 }
 
 t_token	*tokenize_input(const char *line)
@@ -90,7 +128,7 @@ t_token	*tokenize_input(const char *line)
 	t_token	*new_node;
 
 	i = 0;
-	len = strlen(line);
+	len = ft_strlen(line);
 	token_list = NULL;
 	while (i < len)
 	{
