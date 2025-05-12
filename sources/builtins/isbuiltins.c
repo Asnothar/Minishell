@@ -3,7 +3,7 @@
 
 #include "../../header/minishell.h"
 
-int	is_builtin2(t_shell *minishell)
+static int	is_builtin2(t_shell *minishell)
 {
 	if (ft_strcase(minishell->cmds->args[0], "unset") == 0)
 	{

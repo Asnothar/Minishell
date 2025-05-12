@@ -12,6 +12,10 @@
 # define MAGENTA "\033[35m"
 # define CYAN "\033[36m"
 # define RESET "\033[0m"
+# define PATH_MAX 1024
+#define LLONG_MAX 9223372036854775807LL
+#define LLONG_MIN (-9223372036854775807LL - 1)
+
 
 # include "../sources/ultimate_libft/header/ultimate_libft.h"
 
@@ -26,10 +30,8 @@
 # include <sys/ioctl.h>
 # include <termcap.h>
 # include <stdbool.h>
+# include <limits.h>
 
-#ifndef PATH_MAX    // macro pour gerer les chemins absolus dans l envp
-# define PATH_MAX 1024
-#endif
 
 
 typedef struct s_cmd
@@ -110,6 +112,7 @@ int		skip_whitespaces(const char *str, int i, int len);
 void	print_tokens(char **tokens);
 void	free_split(char **split);
 void	free_token_list(t_token *head);
+int		ft_strcase(char *str, char *with_whom);
 
 //  builtins
 //      ft_cd.c
@@ -127,5 +130,17 @@ void	ft_env(t_shell *minishell);
 //      ft_pwd.c
 void	cd_oldpwd(t_shell *minishell);
 int		pwd(void);
+//      ft_exit.c
+void	basic_exit(t_shell *minishell);
+int		ft_atol(char *str);
+void	ft_exit(t_shell *minishell, int is_in_fork, int print);
+//      ft_export.c
+void	ft_print_export(t_env *envp);
+//      ft_export2.c
+void	export(t_shell *minishell);
+//      isbuiltins.c
+int		is_builtin(t_shell *minishell, char **command);
+//      unset.c
+void	unset(t_shell *minishell, char **cmd);
 
 #endif

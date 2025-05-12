@@ -3,7 +3,7 @@
 
 #include "../../header/minishell.h"
 
-t_env	*get_newnode(char *key, t_env *envp)
+static t_env	*get_newnode(char *key, t_env *envp)
 {
 	t_env	*tmp;
 
@@ -19,7 +19,7 @@ t_env	*get_newnode(char *key, t_env *envp)
 	return (tmp);
 }
 
-void	export_change(t_env *envp, char *str, int equal_index)
+static void	export_change(t_env *envp, char *str, int equal_index)
 {
 	char	*key;
 	t_env	*tmp;
@@ -47,7 +47,7 @@ void	export_change(t_env *envp, char *str, int equal_index)
 		tmp->value = NULL;
 }
 
-int	valid_export_arg(char *str)
+static int	valid_export_arg(char *str)
 {
 	int	i;
 

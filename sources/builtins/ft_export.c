@@ -3,7 +3,7 @@
 // trouver la longueur de la liste des variables d'environnement, les classer par ordre alphabetique et les afficher
 
 
-int	env_len(t_env *envp)
+static int	env_len(t_env *envp)
 {
 	int	i;
 
@@ -16,7 +16,7 @@ int	env_len(t_env *envp)
 	return (i);
 }
 
-t_env	*find_min(t_env *envp, t_env *prev_min)
+static t_env	*find_min(t_env *envp, t_env *prev_min)
 {
 	t_env	*min;
 
