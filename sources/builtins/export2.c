@@ -3,9 +3,15 @@
 
 // #include "../../header/minishell.h"
 
+<<<<<<< HEAD
 // t_env	*get_newnode(char *key, t_env *envp)
 // {
 // 	t_env	*tmp;
+=======
+static t_env	*get_newnode(char *key, t_env *envp)
+{
+	t_env	*tmp;
+>>>>>>> seb
 
 // 	tmp = malloc(sizeof(t_env));
 // 	if (!tmp)
@@ -19,10 +25,17 @@
 // 	return (tmp);
 // }
 
+<<<<<<< HEAD
 // void	export_change(t_env *envp, char *str, int equal_index)
 // {
 // 	char	*key;
 // 	t_env	*tmp;
+=======
+static void	export_change(t_env *envp, char *str, int equal_index)
+{
+	char	*key;
+	t_env	*tmp;
+>>>>>>> seb
 
 // 	while (str[equal_index] && str[equal_index] != '=')
 // 		equal_index++;
@@ -47,9 +60,15 @@
 // 		tmp->value = NULL;
 // }
 
+<<<<<<< HEAD
 // int	valid_export_arg(char *str)
 // {
 // 	int	i;
+=======
+static int	valid_export_arg(char *str)
+{
+	int	i;
+>>>>>>> seb
 
 // 	if (!str)
 // 		return (0);

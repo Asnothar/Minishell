@@ -3,6 +3,7 @@
 
 // #include "../../header/minishell.h"
 
+<<<<<<< HEAD
 // int	is_builtin2(t_shell *minishell)
 // {
 // 	if (ft_strcase(minishell->cmds->args[0], "unset") == 0)
@@ -27,6 +28,32 @@
 // 	}
 // 	return (0);
 // }
+=======
+static int	is_builtin2(t_shell *minishell)
+{
+	if (ft_strcase(minishell->cmds->args[0], "unset") == 0)
+	{
+		if (minishell->cmds->args[1])
+			ft_unset(minishell, minishell->cmds);
+		return (1);
+	}
+	if (ft_strcase(minishell->cmds->args[0], "export") == 0)
+	{
+		if (minishell->cmds->args[1])
+			ft_export(minishell);
+		else
+			export_print(minishell->envp);
+		return (1);
+	}
+	if (ft_strcmp(minishell->cmds->args[0], "/usr/bin/cd") == 0
+		|| ft_strcmp(minishell->cmds->args[0], "cd") == 0)
+	{
+		ft_cd(minishell);
+		return (1);
+	}
+	return (0);
+}
+>>>>>>> seb
 
 // int	is_builtin(t_shell *minishell, char **command)
 // {

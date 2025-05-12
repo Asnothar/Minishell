@@ -3,6 +3,7 @@
 
 // #include "../../header/minishell.h"
 
+<<<<<<< HEAD
 // void	unset1(t_shell *minishell, t_env *tmp, t_env *prev, int i)
 // {
 // 	while (tmp)
@@ -28,6 +29,33 @@
 // 		tmp = tmp -> next;
 // 	}
 // }
+=======
+static void	unset1(t_shell *minishell, t_env *tmp, t_env *prev, int i)
+{
+	while (tmp)
+	{		
+		if (ft_strcmp(tmp->key, minishell->cmds->args[i]) == 0)
+		{
+			if (!prev)
+			{
+				tmp = tmp->next;
+				free(minishell->envp->key);
+				free(minishell->envp->value);
+				free(minishell->envp);
+				minishell->envp = tmp;
+				return ;
+			}
+			prev->next = tmp->next;
+			free(tmp->key);
+			free(tmp->value);
+			free(tmp);
+			break ;
+		}
+		prev = tmp;
+		tmp = tmp -> next;
+	}
+}
+>>>>>>> seb
 
 // void	unset(t_shell *minishell, char **cmd)
 // {
