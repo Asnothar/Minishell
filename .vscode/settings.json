@@ -1,9 +1,0 @@
-{
-	"files.associations": {
-		"ultimate_libft.h": "c",
-		"history.h": "c",
-		"readline.h": "c",
-		"termios.h": "c",
-		"minishell.h": "c"
-	}
-}
