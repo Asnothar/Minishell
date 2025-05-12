@@ -19,21 +19,22 @@ int	command_type(t_shell *shell)
 		return (1);
 	if (ft_strncmp(cmd, "pwd", 4) == 0)
 		return (ft_pwd());
-	// if (ft_strncmp(cmd, "cd", 3) == 0)
+	// else if (ft_strncmp(cmd, "cd", 3) == 0)
 	// 	return (ft_cd(shell));
-	// if (ft_strncmp(cmd, "echo", 5) == 0)
+	// else if (ft_strncmp(cmd, "echo", 5) == 0)
 	// 	return (ft_echo(shell));
-	// if (ft_strncmp(cmd, "env", 4) == 0)
+	// else if (ft_strncmp(cmd, "env", 4) == 0)
 	// 	return (ft_env(shell));
-	// if (ft_strncmp(cmd, "exit", 5) == 0)
+	// else if (ft_strncmp(cmd, "exit", 5) == 0)
 	// 	return (ft_exit(shell));
-	// if (ft_strncmp(cmd, "export", 7) == 0)
+	// else if (ft_strncmp(cmd, "export", 7) == 0)
 	// 	return (ft_export(shell));
-	// if (ft_strncmp(cmd, "unset", 6) == 0)
+	// else if (ft_strncmp(cmd, "unset", 6) == 0)
 	// 	return (ft_unset(shell));
-	// if (ft_strncmp(cmd, "./", 2) == 0)
+	// else if (ft_strncmp(cmd, "./", 2) == 0)
 	// 	return (ft_executable(shell));
-	// return (launch_system_command(shell));
+	else
+		write(2, "Command not found\n", 18);
 	return (0);
+	// return (launch_system_command(shell));
 }
-

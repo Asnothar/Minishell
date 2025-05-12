@@ -6,8 +6,12 @@
 void	handle_sigint(int sig)
 {
 	(void)sig;
-	write(1, "\033[36m\nminishell> \033[0m", 22);
+	rl_replace_line("", 0);
+	write(1, "\n", 1);
+	rl_on_new_line();
+	rl_redisplay();
 }
+
 
 void	handle_sigquit(int sig)
 {
