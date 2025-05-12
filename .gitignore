@@ -6,3 +6,9 @@ objet/
 
 # Ignorer l'executable minishell
 minishell
+
+# Ignorer les fichiers de guide
+complementary/
+
+# Ignorer le dossier .vscode
+.vscode/
