@@ -29,7 +29,7 @@ SRC		=	\
 			builtins/unset.c\
 			builtins/exit.c\
 			builtins/ft_export.c\
-			builtins/export2.c\
+			builtins/ft_export2.c\
 			builtins/isbuiltins.c\
 			parsing/parsing_1.c \
 			parsing/parsing_2.c\
