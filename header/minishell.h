@@ -32,12 +32,10 @@
 # include <stdbool.h>
 # include <limits.h>
 
-<<<<<<< HEAD
 #ifndef PATH_MAX    // macro pour gerer les chemins absolus dans l'envp
 # define PATH_MAX 1024
 #endif
-=======
->>>>>>> seb
+
 
 typedef struct s_env
 {
@@ -103,11 +101,9 @@ int		skip_whitespaces(const char *str, int i, int len);
 void	print_tokens(char **tokens);
 void	free_split(char **split);
 void	free_token_list(t_token *head);
-<<<<<<< HEAD
 void	free_shell(t_shell *shell);
 void	free_env_list(t_env *head);
-=======
->>>>>>> seb
+
 int		ft_strcase(char *str, char *with_whom);
 
 //  builtins
@@ -124,12 +120,9 @@ char	*ft_getenv(t_env *envp, const char *name);
 void	ft_update_envp(t_env *envp, const char *name, const char *value);
 void	ft_env(t_shell *minishell);
 //      ft_pwd.c
-<<<<<<< HEAD
 void	set_pwd(t_shell *minishell, char *old, char *new);
 int		ft_pwd(void);
-=======
 void	cd_oldpwd(t_shell *minishell);
-<<<<<<< HEAD
 int		pwd(void);
 //      ft_exit.c
 void	basic_exit(t_shell *minishell);
@@ -143,9 +136,6 @@ void	export(t_shell *minishell);
 int		is_builtin(t_shell *minishell, char **command);
 //      unset.c
 void	unset(t_shell *minishell, char **cmd);
-=======
 int	ft_pwd(void);
->>>>>>> 9bbcaf99245fbc7689baf3281d68923fc6ca7f82
->>>>>>> seb
 
 #endif
