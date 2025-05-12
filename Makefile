@@ -26,8 +26,16 @@ SRC		=	\
 			builtins/ft_echo.c\
 			builtins/ft_env.c\
 			builtins/ft_pwd.c\
+			builtins/unset.c\
+			builtins/exit.c\
+			builtins/ft_export.c\
+			builtins/export2.c\
+			builtins/isbuiltins.c\
 			parsing/parsing_1.c \
 			parsing/parsing_2.c\
+			execution/heredocs.c\
+			execution/pipex.c\
+			execution/redirs.c\
 			main.c \
 
 SRCS	= $(addprefix $(SRC_PATH), $(SRC))

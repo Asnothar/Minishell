@@ -32,10 +32,6 @@
 # include <stdbool.h>
 # include <limits.h>
 
-#ifndef PATH_MAX    // macro pour gerer les chemins absolus dans l'envp
-# define PATH_MAX 1024
-#endif
-
 
 typedef struct s_env
 {
@@ -77,7 +73,7 @@ typedef enum e_token_type
 //		parsing1.c
 int 	parse(t_shell *shell);
 int		command_type(t_shell *shell);
-//              parsing2.c
+//      parsing2.c
 void	err_message(char *message1, char *message2, char *message3);
 
 //	utils
@@ -103,7 +99,6 @@ void	free_split(char **split);
 void	free_token_list(t_token *head);
 void	free_shell(t_shell *shell);
 void	free_env_list(t_env *head);
-
 int		ft_strcase(char *str, char *with_whom);
 
 //  builtins
@@ -122,20 +117,40 @@ void	ft_env(t_shell *minishell);
 //      ft_pwd.c
 void	set_pwd(t_shell *minishell, char *old, char *new);
 int		ft_pwd(void);
-void	cd_oldpwd(t_shell *minishell);
-int		pwd(void);
 //      ft_exit.c
 void	basic_exit(t_shell *minishell);
 int		ft_atol(char *str);
 void	ft_exit(t_shell *minishell, int is_in_fork, int print);
 //      ft_export.c
+int		env_len(t_env *envp);
+t_env	*find_min(t_env *envp, t_env *prev_min);
 void	ft_print_export(t_env *envp);
 //      ft_export2.c
 void	export(t_shell *minishell);
+int		valid_export_arg(char *str);
+void	export_change(t_env *envp, char *str, int equal_index);
+t_env	*get_newnode(char *key, t_env *envp);
 //      isbuiltins.c
 int		is_builtin(t_shell *minishell, char **command);
+int		is_builtin2(t_shell *minishell);
 //      unset.c
 void	unset(t_shell *minishell, char **cmd);
-int	ft_pwd(void);
+void	unset1(t_shell *minishell, t_env *tmp, t_env *prev, int i);
+
+//   execution
+//      pipex.c
+int		pipe_count(t_shell *minishell);
+void	pipex(t_shell *minishell, int **fd, int pipe_index, int pipe_count);
+void	close_fd(int **fd, int count);
+void	waiting_childs(t_shell *minishell, int nb_cmds);
+//      heredocs.c
+void	here_doc1(int write_end, char *limiter);
+int		here_doc(t_shell *shell);
+//      redirs.c
+int		open_infile(char *file);
+int		open_outfile(char *file, t_token_type type);
+void	in_redir(t_shell *shell);
+void	out_redir(t_shell *minishell, t_token_type type);
+void	redirs(t_shell *minishell, t_token_type out_type);
 
 #endif
