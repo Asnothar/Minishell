@@ -103,7 +103,7 @@ int	ft_exit(t_shell *minishell, int is_in_fork, int print)
 			minishell->last_exit_status = 1;
 			print = 1;
 		}
-		else if (is_numeric(arg1))
+		else if (ft_is_numeric(arg1))
 			minishell->last_exit_status = (ft_atol(arg1) % 256);
 		else
 		{
