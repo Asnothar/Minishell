@@ -11,7 +11,7 @@
 // 	while (1)
 // 	{
 // 		str = readline(" > ");
-// 		if (!str || strcmp(str, limiter) == 0)
+// 		if (!str || ft_strcmp(str, limiter) == 0)
 // 		{
 // 			free(str);
 // 			break ;

@@ -3,6 +3,27 @@
 
 // #include "../../header/minishell.h"
 
+
+// int	ft_strcase(char *str, char *with_whom)
+// {
+// 	int		i;
+// 	char	*str1;
+
+// 	str1 = ft_strdup(str);
+// 	i = 0;
+// 	if (!str1)
+// 		return (0);
+// 	while (str1[i])
+// 	{
+// 		if (str1[i] >= 'A' && str1[i] <= 'Z')
+// 			str1[i] += 32;
+// 		i++;
+// 	}
+// 	i = ft_strcmp(str1, with_whom);
+// 	free(str1);
+// 	return (i);
+// }
+
 // int	is_builtin2(t_shell *minishell)
 // {
 // 	if (ft_strcase(minishell->cmds->args[0], "unset") == 0)

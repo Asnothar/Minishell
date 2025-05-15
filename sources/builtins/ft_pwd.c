@@ -10,12 +10,12 @@ void	set_pwd(t_shell *minishell, char *old, char *new)
 	env = minishell->envp;
 	while (env)
 	{
-		if (strcmp(env->key, "PWD") == 0)
+		if (ft_strcmp(env->key, "PWD") == 0)
 		{
 			free(env->value);
 			env->value = ft_strdup(new);
 		}
-		else if (strcmp(env->key, "OLDPWD") == 0)
+		else if (ft_strcmp(env->key, "OLDPWD") == 0)
 		{
 			free(env->value);
 			env->value = ft_strdup(old);

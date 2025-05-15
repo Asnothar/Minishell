@@ -18,24 +18,32 @@ SRC_PATH = sources/
 OBJ_PATH = objet/
 
 SRC		=	\
-			utils/utils_1.c \
-			utils/tokens.c \
+			utils/copy_env.c \
+			utils/free_1.c \
 			utils/init.c \
+			utils/print_debug.c \
 			utils/signal.c \
-			builtins/ft_cd.c\
-			builtins/ft_echo.c\
-			builtins/ft_env.c\
-			builtins/ft_pwd.c\
-			builtins/unset.c\
-			builtins/exit.c\
-			builtins/ft_export.c\
-			builtins/ft_export2.c\
-			builtins/isbuiltins.c\
+			utils/tokens.c \
+			utils/utils_1.c \
+			utils/utils_2.c \
+			\
+			builtins/exit.c \
+			builtins/ft_cd.c \
+			builtins/ft_echo.c \
+			builtins/ft_env.c \
+			builtins/ft_export.c \
+			builtins/ft_export2.c \
+			builtins/ft_pwd.c \
+			builtins/isbuiltins.c \
+			builtins/unset.c \
+			\
 			parsing/parsing_1.c \
-			parsing/parsing_2.c\
-			execution/heredocs.c\
-			execution/pipex.c\
-			execution/redirs.c\
+			parsing/parsing_2.c \
+			\
+			execution/heredocs.c \
+			execution/pipex.c \
+			execution/redirs.c \
+			\
 			main.c \
 
 SRCS	= $(addprefix $(SRC_PATH), $(SRC))
