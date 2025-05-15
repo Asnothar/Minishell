@@ -1,6 +1,3 @@
-
-
-
 // #include "../../header/minishell.h"
 
 // void	cd_absolute(t_shell *minishell)
@@ -112,7 +109,7 @@
 // void	ft_cd(t_shell *minishell)
 // {
 // 	char	*arg;
-	
+
 // 	arg = minishell->cmds->args[1];
 // 	if (!arg || arg[0] == '\0')  
 // 		cd_home(minishell);

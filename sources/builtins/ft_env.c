@@ -1,6 +1,3 @@
-
-
-
 #include "../../header/minishell.h"
 
 char	*ft_getenv(t_env *envp, const char *name)
@@ -17,7 +14,8 @@ char	*ft_getenv(t_env *envp, const char *name)
 void	ft_update_envp(t_env *envp, const char *name, const char *value)
 {
 	t_env	*tmp;
-	
+	t_env	*new;
+
 	tmp = envp;
 	while (tmp)
 	{
@@ -25,15 +23,15 @@ void	ft_update_envp(t_env *envp, const char *name, const char *value)
 		{
 			free(tmp->value);
 			tmp->value = strdup(value);
-			return;
+			return ;
 		}
 		if (!tmp->next)
-			break;
+			break ;
 		tmp = tmp->next;
 	}
-	t_env *new = malloc(sizeof(t_env));
+	new = malloc(sizeof(t_env));
 	if (!new)
-		return;
+		return ;
 	new->key = strdup(name);
 	new->value = strdup(value);
 	new->next = NULL;
@@ -42,7 +40,8 @@ void	ft_update_envp(t_env *envp, const char *name, const char *value)
 
 int	ft_env(t_shell *minishell)
 {
-	t_token *token;
+	t_token	*token;
+	t_env	*env;
 
 	token = minishell->tokens;
 	if (token && token->next)
@@ -52,7 +51,7 @@ int	ft_env(t_shell *minishell)
 		minishell->last_exit_status = 1;
 		return (1);
 	}
-	t_env *env = minishell->envp;
+	env = minishell->envp;
 	while (env)
 	{
 		if (env->value)

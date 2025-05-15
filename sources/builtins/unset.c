@@ -1,6 +1,3 @@
-
-
-
 #include "../../header/minishell.h"
 
 // void	unset1(t_shell *minishell, t_env *tmp, t_env *prev, int i)

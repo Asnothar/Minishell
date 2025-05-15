@@ -1,6 +1,3 @@
-
-
-
 #include "../../header/minishell.h"
 
 t_token	*create_token_node(char *value)
@@ -102,7 +99,8 @@ char	*process_token(const char *line, size_t *i, size_t len)
 		else if (!strchr("\"'", line[*i]))
 		{
 			start = *i;
-			while (*i < len && !isspace(line[*i]) && !strchr("|<>\"'", line[*i]))
+			while (*i < len && !isspace(line[*i])
+				&& !strchr("|<>\"'", line[*i]))
 				(*i)++;
 			fragment = strndup(&line[start], *i - start);
 		}

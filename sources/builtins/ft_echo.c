@@ -1,6 +1,3 @@
-
-
-
 #include "../../header/minishell.h"
 
 int	check_newline_token(t_token *token)
@@ -41,4 +38,3 @@ int	ft_echo(t_shell *minishell)
 	minishell->last_exit_status = 0;
 	return (0);
 }
-

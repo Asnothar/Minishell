@@ -1,6 +1,3 @@
-
-
-
 #include "../../header/minishell.h"
 
 int	parse(t_shell *shell)
@@ -25,8 +22,8 @@ int	command_type(t_shell *shell)
 		return (ft_echo(shell));
 	else if (ft_strncmp(cmd, "env", 4) == 0)
 		return (ft_env(shell));
-	// else if (ft_strncmp(cmd, "exit", 5) == 0)
-	// 	return (ft_exit(shell));
+	else if (ft_strncmp(cmd, "exit", 5) == 0)
+		return (ft_exit(shell, 0, 0));
 	// else if (ft_strncmp(cmd, "export", 7) == 0)
 	// 	return (ft_export(shell));
 	// else if (ft_strncmp(cmd, "unset", 6) == 0)

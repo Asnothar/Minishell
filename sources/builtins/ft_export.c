@@ -1,6 +1,7 @@
-
-// // fonction export de base sans options: affichage pur de la liste
-// // trouver la longueur de la liste des variables d'environnement, les classer par ordre alphabetique et les afficher
+// // fonction export de base sans options:
+// // affichage pur de la liste
+// // trouver la longueur de la liste des variables d'environnement,
+// // les classer par ordre alphabetique et les afficher
 
 // #include "../../header/minishell.h"
 

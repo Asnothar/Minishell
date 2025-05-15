@@ -1,6 +1,3 @@
-
-
-
 // #include "../../header/minishell.h"
 
 // int	open_infile(char *file)

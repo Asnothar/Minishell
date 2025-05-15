@@ -1,11 +1,8 @@
-
-
-
 #include "../../header/minishell.h"
 
 t_shell	*init_shell(char **envp)
 {
-	t_shell *shell;
+	t_shell	*shell;
 
 	shell = malloc(sizeof(t_shell));
 	if (!shell)

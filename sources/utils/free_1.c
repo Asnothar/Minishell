@@ -1,6 +1,3 @@
-
-
-
 #include "../../header/minishell.h"
 
 void	free_split(char **split)
@@ -36,6 +33,7 @@ void	free_shell(t_shell *shell)
 	free_env_list(shell->envp);
 	free(shell);
 }
+
 void	free_env_list(t_env *head)
 {
 	t_env	*tmp;
@@ -49,4 +47,3 @@ void	free_env_list(t_env *head)
 		free(tmp);
 	}
 }
-

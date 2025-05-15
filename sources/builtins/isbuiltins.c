@@ -1,8 +1,4 @@
-
-
-
 // #include "../../header/minishell.h"
-
 
 // int	ft_strcase(char *str, char *with_whom)
 // {

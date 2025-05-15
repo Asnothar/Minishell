@@ -1,6 +1,3 @@
-
-
-
 #include "../../header/minishell.h"
 
 t_env	*create_env_node(char *env)

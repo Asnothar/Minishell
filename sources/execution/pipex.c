@@ -1,6 +1,3 @@
-
-
-
 // #include "../../header/minishell.h"
 
 // int	pipe_count(t_shell *minishell)

@@ -1,6 +1,3 @@
-
-
-
 #include "../../header/minishell.h"
 
 // void	here_doc1(int write_end, char *limiter)

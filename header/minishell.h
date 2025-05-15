@@ -1,7 +1,3 @@
-
-
-
-
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -33,9 +29,9 @@
 
 typedef struct s_env
 {
-	char			*key;	// Clé de l'environnement
-	char			*value;	// Valeur de l'environnement
-	struct s_env	*next;	// Prochain élément de la liste chaînée
+	char			*key;
+	char			*value;
+	struct s_env	*next;
 }	t_env;
 
 typedef struct s_token
@@ -46,10 +42,10 @@ typedef struct s_token
 
 typedef struct s_shell
 {
-	char			**env;		// Copie de l'environnement
-	t_env			*envp;		// Copie de l environnement en liste chainee
-	char			*input;		// Ligne de commande entrée par l'utilisateur
-	t_token			*tokens;	// Input apres tokenisation et Lexing, en Liste Chainee
+	char			**env;
+	t_env			*envp;
+	char			*input;
+	t_token			*tokens;
 	char			*infile;
 	char			*outfile;
 	char			*heredoc_delim;
@@ -104,7 +100,9 @@ void			add_token_back(t_token **head, t_token *new);
 t_token			*tokenize_input(const char *line);
 //				utils_1.c
 int				skip_whitespaces(const char *str, int i, int len);
-int 			ft_strcmp(const char *s1, const char *s2);
+int				ft_strcmp(const char *s1, const char *s2);
+int				ft_isspace(int c);
+int				ft_is_numeric(const char *str);
 //				utils_2.c
 
 //		builtins
@@ -124,9 +122,11 @@ int				ft_env(t_shell *minishell);
 void			set_pwd(t_shell *minishell, char *old, char *new);
 int				ft_pwd(void);
 //				ft_exit.c
+char			*get_token_value(t_token *tokens, int index);
 void			basic_exit(t_shell *minishell);
+void			nb_len_error(char *str, unsigned long long nbr, int sign);
 int				ft_atol(char *str);
-void			ft_exit(t_shell *minishell, int is_in_fork, int print);
+int				ft_exit(t_shell *minishell, int is_in_fork, int print);
 //				ft_export.c
 int				env_len(t_env *envp);
 t_env			*find_min(t_env *envp, t_env *prev_min);

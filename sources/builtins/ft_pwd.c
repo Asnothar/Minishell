@@ -1,6 +1,3 @@
-
-
-
 #include "../../header/minishell.h"
 
 void	set_pwd(t_shell *minishell, char *old, char *new)
@@ -23,6 +20,7 @@ void	set_pwd(t_shell *minishell, char *old, char *new)
 		env = env->next;
 	}
 }
+
 int	ft_pwd(void)
 {
 	char	path[PATH_MAX];
