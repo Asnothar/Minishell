@@ -25,8 +25,8 @@ int	main(int argc, char **argv, char **envp)
 			free(line);
 			continue ;
 		}
-		print_debug_info(line, shell->tokens);
 		parse(shell);
+		print_debug_info(line, shell->tokens);
 		free(line);
 		free_token_list(shell->tokens);
 		shell->tokens = NULL;
