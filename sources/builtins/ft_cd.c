@@ -1,122 +1,131 @@
-// #include "../../header/minishell.h"
+#include "../../header/minishell.h"
 
-// void	cd_absolute(t_shell *minishell)
-// {
-// 	char	*old;
-// 	char	*new;
-// 	char	path[PATH_MAX];
-// 	char	path2[PATH_MAX];
+static char	*get_arg_value(t_shell *shell)
+{
+	t_token	*tok;
 
-// 	old = getcwd(path, PATH_MAX);
-// 	if (chdir(minishell->cmds->args[1]) == -1)
-// 	{
-// 		perror("cd");
-// 		minishell->last_exit_status = 1;
-// 		return ;
-// 	}
-// 	new = getcwd(path2, PATH_MAX);
-// 	if (new == NULL)
-// 	{
-// 		perror("cd");
-// 		minishell->last_exit_status = 1;
-// 		return ;
-// 	}
-// 	set_pwd(minishell, old, new);
-// 	ft_update_envp(minishell->envp, "OLDPWD", old);
-// 	ft_update_envp(minishell->envp, "PWD", new);
-// 	minishell->last_exit_status = 0;
-// }
+	tok = shell->tokens;
+	if (!tok)
+		return (NULL);
+	tok = tok->next;
+	if (!tok)
+		return (NULL);
+	return (tok->value);
+}
 
-// void	cd_relative(t_shell *minishell)
-// {
-// 	char	path[PATH_MAX];
-// 	char	path2[PATH_MAX];
-// 	char	*old;
-// 	char	*new;
+static int	cd_fail(t_shell *shell, char *msg)
+{
+	perror(msg);
+	shell->last_exit_status = 1;
+	return (0);
+}
 
-// 	old = getcwd(path, PATH_MAX);
-// 	if (!old || chdir(minishell->cmds->args[1]) == -1)
-// 	{
-// 		perror("cd");
-// 		minishell->last_exit_status = 1;
-// 		return;
-// 	}
-// 	new = getcwd(path2, PATH_MAX);
-// 	if (!new)
-// 	{
-// 		perror("cd");
-// 		minishell->last_exit_status = 1;
-// 		return;
-// 	}
-// 	set_pwd(minishell, old, new);
-// 	ft_update_envp(minishell->envp, "OLDPWD", old);
-// 	ft_update_envp(minishell->envp, "PWD", new);
-// 	minishell->last_exit_status = 0;
-// }
+static void	cd_update_env(t_shell *shell, char *old, char *new)
+{
+	set_pwd(shell, old, new);
+	ft_update_envp(shell->envp, "OLDPWD", old);
+	ft_update_envp(shell->envp, "PWD", new);
+	shell->last_exit_status = 0;
+}
 
-// void	cd_home(t_shell *minishell)
-// {
-// 	char	path[PATH_MAX];
-// 	char	path2[PATH_MAX];
-// 	char	*old;
-// 	char	*new;
-// 	char	*home;
+void	cd_absolute(t_shell *shell)
+{
+	char	path_old[PATH_MAX];
+	char	path_new[PATH_MAX];
+	char	*arg;
 
-// 	old = getcwd(path, PATH_MAX);
-// 	home = ft_getenv(minishell->envp, "HOME");
-// 	if (!home)
-// 	{
-// 		write(2, "cd: HOME not set\n", 17);
-// 		minishell->last_exit_status = 1;
-// 		return;
-// 	}
-// 	if (chdir(home) == -1)
-// 	{
-// 		perror("cd");
-// 		minishell->last_exit_status = 1;
-// 		return;
-// 	}
-// 	new = getcwd(path2, PATH_MAX);
-// 	ft_update_envp(minishell->envp, "OLDPWD", old);
-// 	ft_update_envp(minishell->envp, "PWD", new);
-// 	minishell->last_exit_status = 0;
-// }
+	arg = get_arg_value(shell);
+	if (!arg || !getcwd(path_old, PATH_MAX) || chdir(arg) == -1)
+		return ((void)cd_fail(shell, "cd"));
+	if (!getcwd(path_new, PATH_MAX))
+		return ((void)cd_fail(shell, "cd"));
+	cd_update_env(shell, path_old, path_new);
+}
 
-// void	cd_tilde(t_shell *minishell, char *arg)
-// {
-// 	char	path[PATH_MAX];
-// 	char	path2[PATH_MAX];
-// 	char	*old;
-// 	char	*joined;
-// 	char	*home;
+void	cd_relative(t_shell *shell)
+{
+	char	path_old[PATH_MAX];
+	char	path_new[PATH_MAX];
+	char	*arg;
 
-// 	home = ft_getenv(minishell->envp, "HOME");
-// 	if (!home)
-// 		return ((void)(write(2, "cd: HOME not set\n", 17),
-// 			minishell->last_exit_status = 1));
+	arg = get_arg_value(shell);
+	if (!arg || !getcwd(path_old, PATH_MAX) || chdir(arg) == -1)
+		return ((void)cd_fail(shell, "cd"));
+	if (!getcwd(path_new, PATH_MAX))
+		return ((void)cd_fail(shell, "cd"));
+	cd_update_env(shell, path_old, path_new);
+}
 
-// 	old = getcwd(path, PATH_MAX);
-// 	joined = ft_strjoin(home, arg + 1);
-// 	if (!joined || chdir(joined) == -1)
-// 		return ((void)(free(joined), perror("cd"),
-// 			minishell->last_exit_status = 1));
-// 	ft_update_envp(minishell->envp, "OLDPWD", old);
-// 	ft_update_envp(minishell->envp, "PWD", getcwd(path2, PATH_MAX));
-// 	free(joined);
-// 	minishell->last_exit_status = 0;
-// }
+void	cd_home(t_shell *shell)
+{
+	char	path_old[PATH_MAX];
+	char	path_new[PATH_MAX];
+	char	*home;
 
-// void	ft_cd(t_shell *minishell)
-// {
-// 	char	*arg;
+	home = ft_getenv(shell->envp, "HOME");
+	if (!home)
+	{
+		write(2, "cd: HOME not set\n", 17);
+		shell->last_exit_status = 1;
+		return ;
+	}
+	if (!getcwd(path_old, PATH_MAX) || chdir(home) == -1)
+		return ((void)cd_fail(shell, "cd"));
+	if (!getcwd(path_new, PATH_MAX))
+		return ((void)cd_fail(shell, "cd"));
+	cd_update_env(shell, path_old, path_new);
+}
 
-// 	arg = minishell->cmds->args[1];
-// 	if (!arg || arg[0] == '\0')  
-// 		cd_home(minishell);
-// 	else if (arg[0] == '/' )        
-// 		cd_absolute(minishell);
-// 	else if (arg[0] == '~')           
-// 		cd_tilde(minishell, arg);
-// 	else                                
-// 		cd_relative(minishell);
-// }
+static char	*cd_tilde_dest(t_shell *shell, char *arg)
+{
+	char	*home;
+
+	home = ft_getenv(shell->envp, "HOME");
+	if (!home)
+		return (NULL);
+	if (arg && arg[0] == '~')
+		return (ft_strjoin(home, arg + 1));
+	return (ft_strdup(home));
+}
+
+void	cd_tilde(t_shell *shell)
+{
+	char	path_old[PATH_MAX];
+	char	path_new[PATH_MAX];
+	char	*arg;
+	char	*dest;
+
+	arg = get_arg_value(shell);
+	dest = cd_tilde_dest(shell, arg);
+	if (!dest)
+	{
+		write(2, "cd: HOME not set\n", 17);
+		shell->last_exit_status = 1;
+		return ;
+	}
+	if (!getcwd(path_old, PATH_MAX) || chdir(dest) == -1)
+	{
+		free(dest);
+		return ((void)cd_fail(shell, "cd"));
+	}
+	free(dest);
+	if (!getcwd(path_new, PATH_MAX))
+		return ((void)cd_fail(shell, "cd"));
+	cd_update_env(shell, path_old, path_new);
+}
+
+int	ft_cd(t_shell *shell)
+{
+	char	*arg;
+
+	arg = get_arg_value(shell);
+	if (!arg || arg[0] == '\0')
+		cd_home(shell);
+	else if (arg[0] == '/')
+		cd_absolute(shell);
+	else if (arg[0] == '~')
+		cd_tilde(shell);
+	else
+		cd_relative(shell);
+	return (0);
+}

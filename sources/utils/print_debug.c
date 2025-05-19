@@ -37,7 +37,9 @@ void	print_debug_info(char *line, t_token *tokens)
 	int				i;
 	t_token_type	type;
 
-	printf("\033[33m\n---------- Input -----------\n");
+	printf("\033[33m\n--------- Position ---------\n");
+	ft_pwd();
+	printf("\033[33m---------- Input -----------\n");
 	if (line)
 		printf("[%s]\n", line);
 	else

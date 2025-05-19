@@ -107,11 +107,11 @@ int				ft_is_numeric(const char *str);
 
 //		builtins
 //				ft_cd.c
-void			cd_absolute(t_shell *minishell);
-void			cd_relative(t_shell *minishell);
-void			cd_home(t_shell *minishell);
-void			cd_tilde(t_shell *minishell, char *arg);
-void			ft_cd(t_shell *minishell);
+void			cd_absolute(t_shell *shell);
+void			cd_relative(t_shell *shell);
+void			cd_home(t_shell *shell);
+void			cd_tilde(t_shell *shell);
+int				ft_cd(t_shell *shell);
 //				ft_echo.c
 int				ft_echo(t_shell *minishell);
 //				ft_env.c

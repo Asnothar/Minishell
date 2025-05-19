@@ -16,8 +16,8 @@ int	command_type(t_shell *shell)
 		return (1);
 	if (ft_strncmp(cmd, "pwd", 4) == 0)
 		return (ft_pwd());
-	// else if (ft_strncmp(cmd, "cd", 3) == 0)
-	// 	return (ft_cd(shell));
+	else if (ft_strncmp(cmd, "cd", 3) == 0) // NE PAS OUBLIER LE "-" POUR LE RETOUR A LA PRECEDENTE POSITION
+		return (ft_cd(shell));
 	else if (ft_strncmp(cmd, "echo", 5) == 0)
 		return (ft_echo(shell));
 	else if (ft_strncmp(cmd, "env", 4) == 0)
