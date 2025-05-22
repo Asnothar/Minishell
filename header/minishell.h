@@ -69,6 +69,9 @@ int				parse(t_shell *shell);
 int				command_type(t_shell *shell);
 //				parsing2.c
 void			err_message(char *message1, char *message2, char *message3);
+int				check_first_token_pipe(t_token *tokens);
+int				check_or_operator(t_token *tokens);
+int				check_redir_syntaxe(t_token *tokens);
 
 //		utils
 //				copy_env.c

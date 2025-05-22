@@ -4,6 +4,12 @@ int	parse(t_shell *shell)
 {
 	if (!shell || !shell->tokens)
 		return (1);
+	if (check_or_operator(shell->tokens))
+		return (1);
+	if (check_first_token_pipe(shell->tokens))
+		return (1);
+	if (check_redir_syntaxe(shell->tokens))
+		return (1);
 	return (command_type(shell));
 }
 
@@ -16,7 +22,7 @@ int	command_type(t_shell *shell)
 		return (1);
 	if (ft_strncmp(cmd, "pwd", 4) == 0)
 		return (ft_pwd());
-	else if (ft_strncmp(cmd, "cd", 3) == 0) // NE PAS OUBLIER LE "-" POUR LE RETOUR A LA PRECEDENTE POSITION
+	else if (ft_strncmp(cmd, "cd", 3) == 0)
 		return (ft_cd(shell));
 	else if (ft_strncmp(cmd, "echo", 5) == 0)
 		return (ft_echo(shell));
