@@ -19,6 +19,7 @@ OBJ_PATH = objet/
 
 SRC		=	\
 			utils/copy_env.c \
+			utils/expand_var.c \
 			utils/free_1.c \
 			utils/init.c \
 			utils/print_debug.c \

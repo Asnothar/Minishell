@@ -37,6 +37,7 @@ typedef struct s_env
 typedef struct s_token
 {
 	char			*value;
+	int 			quote_type;
 	struct s_token	*next;
 }	t_token;
 
@@ -72,6 +73,7 @@ void			err_message(char *message1, char *message2, char *message3);
 int				check_first_token_pipe(t_token *tokens);
 int				check_or_operator(t_token *tokens);
 int				check_redir_syntaxe(t_token *tokens);
+int				check_variable(t_shell *shell);
 
 //		utils
 //				copy_env.c
@@ -94,7 +96,7 @@ void			print_debug_info(char *line, t_token *tokens);
 void			handle_sigint(int sig);
 void			handle_sigquit(int sig);
 void			setup_signals(void);
-//				tokens.c
+//				tokens.c	`
 char			*handle_quotes(const char *line, size_t *i, size_t len);
 char			*handle_special_characters(const char *line, size_t *i);
 char			*process_token(const char *line, size_t *i, size_t len);

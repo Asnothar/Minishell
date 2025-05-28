@@ -10,6 +10,8 @@ int	parse(t_shell *shell)
 		return (1);
 	if (check_redir_syntaxe(shell->tokens))
 		return (1);
+	if (check_variable(shell))
+		return (1);
 	return (command_type(shell));
 }
 
